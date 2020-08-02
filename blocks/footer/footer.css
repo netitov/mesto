@@ -1,0 +1,9 @@
+@import url(./__copyright/footer__copyright.css);
+
+.footer {
+  width: 68.90vw;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+  padding-bottom: 60px;
+}
