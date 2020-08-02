@@ -1,4 +1,6 @@
 @import url(./__header/page__header.css);
+@import url(./__elements/page__elements.css);
+@import url(./__profile/page__profile.css);
 
 
 .page {
