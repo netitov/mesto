@@ -4,3 +4,11 @@
   margin-top: 16px;
   margin-bottom: 0px;
 }
+
+@media (max-width: 768px) {
+  .profile__occupation {
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 14px;
+  }
+}

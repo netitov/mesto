@@ -1,5 +1,10 @@
 .profile__edit-button {
   width: 24px;
   height: 24px;
-  align-self: center;
+}
+
+@media (max-width: 768px) {
+  .profile__edit-button {
+    width: 18px;
+  }
 }
