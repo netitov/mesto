@@ -4,9 +4,16 @@
   border: 2px solid #FFFFFF;
   box-sizing: border-box;
   border-radius: 2px;
-  display: flex;
-  align-content: center;
-  justify-content: center;
+  background-image: url(../../../images/add-btn.svg);
+  background-color: rgba(1, 1, 1, 1);
+  background-repeat: no-repeat;
+  background-position: center;
+  outline: none;
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 @media (max-width: 929px) {
