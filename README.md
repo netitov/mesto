@@ -1,6 +1,6 @@
 # Проект 4: Место
 
-https://t-nick-13.github.io/russian-travel/
+https://t-nick-13.github.io/mesto/index.html
 
 ## Цель проекта:
 * Освоение Java Script 
