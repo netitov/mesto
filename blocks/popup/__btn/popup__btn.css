@@ -1,6 +1,6 @@
 .popup__btn {
   width: 358px;
-  height: 50.15px;
+  min-height: 50.15px;
   margin: 48px 36px 36.51px;
   padding: 0;
   background: #000000;
@@ -16,4 +16,21 @@
 .popup__btn:hover {
   background: rgba(0, 0, 0, 0.8);
 }
+
+@media (max-width: 960px) {
+  .popup__btn  {
+    align-self: center;
+  }
+}
+
+@media (max-width: 425px) {
+  .popup__btn  {
+    width: 282px;
+    font-size: 16px;
+    line-height: 1.2;
+    min-height: 40px;
+    margin: 40px auto 30px;
+  }
+}
+
 

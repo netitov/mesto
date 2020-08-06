@@ -5,3 +5,9 @@
   border-radius: 10px;
   margin-bottom: 21px;
 }
+
+@media (max-width: 768px) {
+  .elements__element {
+    margin-bottom: 20px;
+  }
+}

@@ -46,3 +46,16 @@
   font-style: normal;
   font-weight: normal;
 }
+
+@media (max-width: 960px) {
+  .popup__text  {
+    align-self: center;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 425px) {
+  .popup__text  {
+    width: 282px;
+  }
+}

@@ -5,3 +5,17 @@
   color: #000000;
   margin: 34px 64px 54px 36px;
 }
+
+@media (max-width: 960px) {
+  .popup__heading  {
+    align-self: center;
+  }
+}
+
+@media (max-width: 425px) {
+  .popup__heading  {
+    font-size: 20px;
+    line-height: 1.2;
+    margin: auto;
+  }
+}

@@ -9,7 +9,7 @@
   flex-wrap: wrap;
   width: 68.9vw;
   justify-content: space-between;
-  max-width: 1280px;
+  max-width: 882px;
 }
 
 @media (max-width: 1250px) {
