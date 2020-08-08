@@ -7,15 +7,16 @@
 .elements {
   display: flex;
   flex-wrap: wrap;
-  width: 69vw;;
+  width: 69vw;
   justify-content: space-between;
   max-width: 882px;
   padding: 0;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1279px) {
   .elements {
     justify-content: space-evenly;
+    width: 90vw;
   }
 }
 

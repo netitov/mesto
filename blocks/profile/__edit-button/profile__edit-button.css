@@ -5,8 +5,9 @@
   background-color: rgba(1, 1, 1, 1);
   background-repeat: no-repeat;
   background-position: center;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #FFF;
   outline: none;
+  transition: opacity 0.5s linear;
 }
 
 .profile__edit-button:hover {

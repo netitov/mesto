@@ -10,6 +10,7 @@
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
+  transition: opacity 0.5s linear;
 }
 
 .popup__close-btn:hover {

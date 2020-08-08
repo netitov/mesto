@@ -13,8 +13,6 @@ const popupToggle = function () {
   jobInput.value = occupation.textContent;
 }
 
-console.log(document.querySelector('.popup__text_name').value);
-
 const closePopup = function(event) {
   if (event.target !== event.currentTarget) return
   popupToggle(event);

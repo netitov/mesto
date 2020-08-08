@@ -15,6 +15,16 @@
   content: ' ';
 }
 
+@media (max-width: 1279px) {
+  .header {
+    width: 90vw;
+  }
+
+  .header:after {
+    width: 90vw;
+  }
+}
+
 @media (max-width: 480px) {
   .header {
     padding-top: 28px;
