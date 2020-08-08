@@ -4,6 +4,7 @@
   background: #FFFFFF;
   border-radius: 10px;
   margin-bottom: 21px;
+  list-style: none;
 }
 
 @media (max-width: 768px) {

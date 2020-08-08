@@ -4,6 +4,7 @@
 @import url(./__text/popup__text.css);
 @import url(./__close-btn/popup__close-btn.css);
 @import url(./_opened/popup_opened.css);
+@import url(./__form/popup__form.css);
 
 .popup {
   display: none;

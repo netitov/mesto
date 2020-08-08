@@ -5,9 +5,9 @@
 
 
 .page {
-  background: #000000;
-  color: #FFFFFF;
-  font-family: 'Inter', Arial, serif;
+  background: #000;
+  color: #FFF;
+  font-family: 'Inter', Arial, Tahoma;
   box-sizing: border-box;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;

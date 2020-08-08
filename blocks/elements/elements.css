@@ -7,9 +7,10 @@
 .elements {
   display: flex;
   flex-wrap: wrap;
-  width: 68.9vw;
+  width: 69vw;;
   justify-content: space-between;
   max-width: 882px;
+  padding: 0;
 }
 
 @media (max-width: 1250px) {
