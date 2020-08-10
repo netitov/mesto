@@ -11,4 +11,10 @@
   background-color: transparent;
   outline: none;
   padding: 0;
+  transition: opacity 0.5s linear;
+}
+
+.elements__like:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }

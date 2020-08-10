@@ -10,7 +10,7 @@
   text-align: center;
   color: #FFF;
   border: 0;
-  font-family: 'Inter', Arial, Tahoma;
+  font-family: 'Inter', Arial, Helvetica, Sans-serif;
   font-weight: normal;
   transition: background 0.5s linear;
 }

@@ -5,18 +5,24 @@
 @import url(./__title/elements__title.css);
 
 .elements {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   width: 69vw;
-  justify-content: space-between;
+  justify-content: center;
+  grid-template-columns: auto auto auto;
+  gap: 21px 18px;
   max-width: 882px;
   padding: 0;
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 929px) {
   .elements {
-    justify-content: space-evenly;
-    width: 90vw;
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 605px) {
+  .elements {
+    grid-template-columns: auto;
   }
 }
 
