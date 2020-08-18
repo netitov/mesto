@@ -70,12 +70,45 @@ const elementContainer = document.querySelector('.elements');
 
 const addCard = (card) => {
   const addElement = document.querySelector('#cardsTemplate').content.cloneNode(true); 
-
   addElement.querySelector('.elements__title').textContent = card.name;
-
   addElement.querySelector('.elements__img').src = card.link;  
-
   elementContainer.append(addElement)
 }
 
 initialCards.forEach(addCard)
+
+
+
+const popupCard = document.querySelector('.popup_card');
+const popupAddButton = document.querySelector('.profile__add-button');
+const popupCardCloseButton = popupCard.querySelector('.popup__close-btn');
+
+let nameCardInput = popupCard.querySelector('.popup__text_name');
+let linkInput = popupCard.querySelector('.popup__text_occupation');
+//let name = document.querySelector('.profile__name');
+//let occupation = document.querySelector('.profile__occupation');
+
+const popupCardAdd = function () {
+  popupCard.classList.add('popup_opened');
+  //nameCardInput.value = name.textContent;
+  //jobInput.value = occupation.textContent;
+}
+
+
+const popupCardRemove = function () {
+  popupCard.classList.remove('popup_opened');
+}
+
+const closePopupCard = function(event) {
+  if (event.target !== event.currentTarget) return
+  popupCardRemove(event);
+}
+
+popupAddButton.addEventListener('click', popupCardAdd);
+popupCardCloseButton.addEventListener('click', popupCardRemove);
+popupCard.addEventListener('click', closePopupCard);
+
+
+
+
+
