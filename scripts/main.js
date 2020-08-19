@@ -66,34 +66,30 @@ const initialCards = [
   }
 ];
 
-const elementContainer = document.querySelector('.elements');
+
+//Добавление карточек при загрузке
+const elementContainer = document.querySelector('.elements')
 
 const addCard = (card) => {
-  const addElement = document.querySelector('#cardsTemplate').content.cloneNode(true); 
-  addElement.querySelector('.elements__title').textContent = card.name;
-  addElement.querySelector('.elements__img').src = card.link;  
+  const addElement = document.querySelector('#cardsTemplate').content.cloneNode(true)
+
+  addElement.querySelector('.elements__title').textContent = card.name
+  addElement.querySelector('.elements__img').src = card.link
+
   elementContainer.append(addElement)
 }
 
 initialCards.forEach(addCard)
 
 
-
 const popupCard = document.querySelector('.popup_card');
 const popupAddButton = document.querySelector('.profile__add-button');
 const popupCardCloseButton = popupCard.querySelector('.popup__close-btn');
 
-let nameCardInput = popupCard.querySelector('.popup__text_name');
-let linkInput = popupCard.querySelector('.popup__text_occupation');
-//let name = document.querySelector('.profile__name');
-//let occupation = document.querySelector('.profile__occupation');
 
 const popupCardAdd = function () {
   popupCard.classList.add('popup_opened');
-  //nameCardInput.value = name.textContent;
-  //jobInput.value = occupation.textContent;
-}
-
+  }
 
 const popupCardRemove = function () {
   popupCard.classList.remove('popup_opened');
@@ -107,6 +103,46 @@ const closePopupCard = function(event) {
 popupAddButton.addEventListener('click', popupCardAdd);
 popupCardCloseButton.addEventListener('click', popupCardRemove);
 popupCard.addEventListener('click', closePopupCard);
+
+
+//Добавление новой карточки
+const CardAddPopup = document.querySelector('.popup__form_card')
+
+CardAddPopup.addEventListener('submit', event => {
+  event.preventDefault()
+
+  const newCard = {
+    name: document.querySelector('.popup__text_place').value,
+    link: document.querySelector('.popup__text_link').value
+  }
+
+  addCard(newCard)
+
+  CardAddPopup.reset()
+
+  popupCardRemove();
+
+})
+
+//Добавление лайков
+
+addElement.querySelector('.elements__like').addEventListener('click', function(evt) {
+  evt.target.classList.toggle('.elements__like_active')
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
