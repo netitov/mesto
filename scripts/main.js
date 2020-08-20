@@ -76,8 +76,14 @@ const addCard = (card) => {
   addElement.querySelector('.elements__title').textContent = card.name
   addElement.querySelector('.elements__img').src = card.link
 
-  elementContainer.append(addElement)
-}
+  elementContainer.prepend(addElement)
+
+  //Добавление лайков
+  const likeButton = document.querySelector('.elements__like');
+  likeButton.addEventListener('click', function(event) {
+    event.target.classList.toggle('elements__like_active')
+  })
+  }
 
 initialCards.forEach(addCard)
 
@@ -124,11 +130,7 @@ CardAddPopup.addEventListener('submit', event => {
 
 })
 
-//Добавление лайков
 
-addElement.querySelector('.elements__like').addEventListener('click', function(evt) {
-  evt.target.classList.toggle('.elements__like_active')
-})
 
 
 
