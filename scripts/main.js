@@ -91,11 +91,25 @@ const addCard = (card) => {
   deleteButton.addEventListener('click', function() {
     cardElement.classList.toggle('elements__element_deleted')
   })
+
+ //Увеличение фото
+  const popupImg = document.querySelector('.popup-image');
+  const cardImg = document.querySelector('.elements__img');
+
+  cardImg.addEventListener('click', function() {
+    popupImg.classList.add('popup-image_active')
+
+  document.querySelector('.popup-image__title').textContent = card.name
+  document.querySelector('.popup-image__picture').src = card.link
+})
   }
 
 initialCards.forEach(addCard)
 
+//закрытие попап добавление
 
+
+//Открытие и закрытие попап добавления карточек
 const popupCard = document.querySelector('.popup_card');
 const popupAddButton = document.querySelector('.profile__add-button');
 const popupCardCloseButton = popupCard.querySelector('.popup__close-btn');
@@ -138,13 +152,6 @@ CardAddPopup.addEventListener('submit', event => {
 
 })
 
-
-const cardImg = document.querySelector('.popup__image');
-//const cardElement = document.querySelector('.elements__element')
-
-cardImg.addEventListener('click', function() {
-  cardImg.classList.toggle('elements__img_active')
-})
 
 
 
