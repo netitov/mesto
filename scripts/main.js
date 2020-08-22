@@ -139,13 +139,12 @@ CardAddPopup.addEventListener('submit', event => {
 })
 
 
+const cardImg = document.querySelector('.popup__image');
+//const cardElement = document.querySelector('.elements__element')
 
-//const cardDelete = function () {
-//  cardElement.classList.toggle('elements__element_deleted');
-//}
-
-//deleteButton.addEventListener('click', cardDelete)
-
+cardImg.addEventListener('click', function() {
+  cardImg.classList.toggle('elements__img_active')
+})
 
 
 
