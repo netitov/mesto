@@ -83,6 +83,14 @@ const addCard = (card) => {
   likeButton.addEventListener('click', function(event) {
     event.target.classList.toggle('elements__like_active')
   })
+
+  //Удаление карточек
+  const deleteButton = document.querySelector('.elements__del');
+  const cardElement = document.querySelector('.elements__element')
+  
+  deleteButton.addEventListener('click', function() {
+    cardElement.classList.toggle('elements__element_deleted')
+  })
   }
 
 initialCards.forEach(addCard)
@@ -132,6 +140,11 @@ CardAddPopup.addEventListener('submit', event => {
 
 
 
+//const cardDelete = function () {
+//  cardElement.classList.toggle('elements__element_deleted');
+//}
+
+//deleteButton.addEventListener('click', cardDelete)
 
 
 
