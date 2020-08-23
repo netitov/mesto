@@ -19,21 +19,6 @@
   cursor: pointer;
 }
 
-/*@media (max-width: 515px) {
-  .popup__close-btn   {
-    top: -40px;
-    right: 0;
-  }
-}*/
-
-/*@media (max-width: 425px) {
-  .popup__close-btn   {
-    width: 25px;
-    top: -40px;
-    width: 35px;
-  }
-}*/
-
 @media (max-width: 480px) {
   .popup__close-btn   {
     width: 30px;

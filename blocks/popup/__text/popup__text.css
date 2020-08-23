@@ -12,13 +12,6 @@
   margin-bottom: 29.74px;
 }
 
-/*@media (max-width: 960px) {
-  .popup__text  {
-    align-self: center;
-    margin-left: 0;
-  }
-}*/
-
 @media (max-width: 480px) {
   .popup__text  {
     width: 62vw;

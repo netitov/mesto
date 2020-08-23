@@ -20,12 +20,6 @@
   cursor: pointer;
 }
 
-/*@media (max-width: 960px) {
-  .popup__btn  {
-    align-self: center;
-  }
-}*/
-
 @media (max-width: 480px) {
   .popup__btn  {
     width: 62VW;
