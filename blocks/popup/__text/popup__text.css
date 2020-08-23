@@ -12,15 +12,24 @@
   margin-bottom: 29.74px;
 }
 
-@media (max-width: 960px) {
+/*@media (max-width: 960px) {
   .popup__text  {
     align-self: center;
     margin-left: 0;
   }
-}
+}*/
 
-@media (max-width: 425px) {
+@media (max-width: 480px) {
   .popup__text  {
-    width: 282px;
+    width: 62vw;
+    font-size: 12px;
+    line-height: 15px;
+    align-self: center;
+    margin-left: 0;
+    padding-bottom: 12px;
+
+  }
+  .popup__text:first-of-type {
+    margin-bottom: 20px;
   }
 }

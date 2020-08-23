@@ -11,6 +11,7 @@
   background-repeat: no-repeat;
   background-position: center;
   transition: opacity 0.5s linear;
+  padding: 0;
 }
 
 .popup__close-btn:hover {
@@ -18,17 +19,27 @@
   cursor: pointer;
 }
 
-@media (max-width: 515px) {
+/*@media (max-width: 515px) {
   .popup__close-btn   {
     top: -40px;
     right: 0;
   }
-}
+}*/
 
-@media (max-width: 425px) {
+/*@media (max-width: 425px) {
   .popup__close-btn   {
     width: 25px;
     top: -40px;
     width: 35px;
+  }
+}*/
+
+@media (max-width: 480px) {
+  .popup__close-btn   {
+    width: 30px;
+    height: 30px;
+    top: -32px;
+    right: -32px;
+   
   }
 }

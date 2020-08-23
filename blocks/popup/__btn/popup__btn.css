@@ -20,19 +20,19 @@
   cursor: pointer;
 }
 
-@media (max-width: 960px) {
+/*@media (max-width: 960px) {
   .popup__btn  {
     align-self: center;
   }
-}
+}*/
 
-@media (max-width: 425px) {
+@media (max-width: 480px) {
   .popup__btn  {
-    width: 282px;
-    font-size: 16px;
-    line-height: 1.2;
+    width: 62VW;
+    font-size: 14px;
+    line-height: 17px;
     min-height: 40px;
-    margin: 40px auto 30px;
+    margin: 36px auto 30px;
   }
 }
 

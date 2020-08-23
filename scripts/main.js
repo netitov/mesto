@@ -102,11 +102,15 @@ const addCard = (card) => {
   document.querySelector('.popup-image__title').textContent = card.name
   document.querySelector('.popup-image__picture').src = card.link
 })
-  }
+//Закрытие фото
+  const popupImgСlose = document.querySelector('.popup-image__close-btn');
+
+  popupImgСlose.addEventListener('click', function() {
+    popupImg.classList.remove('popup-image_active')
+  })
+}
 
 initialCards.forEach(addCard)
-
-//закрытие попап добавление
 
 
 //Открытие и закрытие попап добавления карточек
