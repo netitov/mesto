@@ -23,49 +23,7 @@
         <button type="button" class="profile__add-button"></button>
       </section>
       <ul class="elements page__elements">
-        <!--<li class="elements__element">
-          <img class="elements__img" src="./images/karachaevsk.jpg" alt="Изображение Карачаевск">
-          <div class="elements__container">
-            <h2 class="elements__title">Карачаевск</h2>
-            <button type="button" class="elements__like" src="./images/Vector.svg" alt="Изображение отметка Нравится"></button>
-          </div>
-        </li>
-        <li class="elements__element">
-          <img class="elements__img" src="./images/elbrus.jpg" alt="Изображение Эльбрус">
-          <div class="elements__container">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button type="button" class="elements__like" src="./images/Vector.svg" alt="Изображение отметка Нравится"></button>
-          </div>
-        </li>
-        <li class="elements__element">
-          <img class="elements__img" src="./images/dombay.jpg" alt="Изображение Домбай">
-          <div class="elements__container">
-            <h2 class="elements__title">Домбай</h2>
-            <button type="button" class="elements__like" src="./images/Vector.svg" alt="Изображение отметка Нравится"></button>
-          </div>
-        </li>
-        <li class="elements__element">
-          <img class="elements__img" src="./images/elbrus.jpg" alt="Изображение Эльбрус ">
-          <div class="elements__container">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button type="button" class="elements__like" src="./images/Vector.svg" alt="Изображение отметка Нравится"></button>
-          </div>
-        </li>
-        <li class="elements__element">
-          <img class="elements__img" src="./images/dombay.jpg" alt="Изображение Домбай">
-          <div class="elements__container">
-            <h2 class="elements__title">Домбай</h2>
-            <button type="button" class="elements__like" src="./images/Vector.svg" alt="Изображение отметка Нравится"></button>
-          </div>
-        </li>
-        <li class="elements__element">
-          <img class="elements__img" src="./images/karachaevsk.jpg" alt="Изображение Карачаево-Черкесия">
-          <div class="elements__container">
-            <h2 class="elements__title">Карачаево-Черкесия</h2>
-            <button type="button" class="elements__like" src="./images/Vector.svg" alt="Изображение отметка Нравится"></button>
-          </div>
-        </li>-->
-      </ul>
+        </ul>
       <footer class="footer page__footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
       </footer>
@@ -75,29 +33,28 @@
           <form class="popup__form">
             <input type="text" placeholder="Имя" class="popup__text popup__text_name">
             <input type="text" placeholder="О себе" class="popup__text popup__text_occupation">
-          <button class="popup__btn" type="submit">Сохранить</button>
+            <button class="popup__btn" type="submit">Сохранить</button>
           </form>
           <button class="popup__close-btn" type="button"></button>
-        </form>
+        </div>
       </div>
-    </div>
-    <div class="popup popup_card">
-      <div class="popup__container">
-        <h2 class="popup__heading">Новое место</h2>
-        <form class="popup__form popup__form_card">
-          <input type="text" placeholder="Название" class="popup__text popup__text_place">
-          <input type="text" placeholder="Ссылка на картинку" class="popup__text popup__text_link">
-        <button class="popup__btn popup__btn-crd" type="submit">Сохранить</button>
-        </form>
-        <button class="popup__close-btn" type="button"></button>
-      </form>
-    </div>
-  </div>
-    <div class="popup-image">
-      <div class="popup-image__container">
-        <img class="popup-image__picture" src="" alt="">
-        <figcaption class="popup-image__title"></figcaption>
-        <button class="popup-image__close-btn" type="button"></button>
+      <div class="popup popup_card">
+        <div class="popup__container">
+          <h2 class="popup__heading">Новое место</h2>
+          <form class="popup__form popup__form_card">
+            <input type="text" placeholder="Название" class="popup__text popup__text_place">
+            <input type="text" placeholder="Ссылка на картинку" class="popup__text popup__text_link">
+          <button class="popup__btn popup__btn-crd" type="submit">Создать</button>
+          </form>
+          <button class="popup__close-btn" type="button"></button>
+        </div>
+      </div>
+      <div class="popup-image">
+        <figure class="popup-image__container">
+          <img class="popup-image__picture" src="" alt="">
+          <figcaption class="popup-image__title"></figcaption>
+          <button class="popup-image__close-btn" type="button"></button>
+        </figure>
       </div>
     </div>
     <template id="cardsTemplate">
