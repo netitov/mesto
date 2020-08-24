@@ -1,6 +1,6 @@
 # Проект 4: Место
 
-https://t-nick-13.github.io/mesto/index.html
+https://t-nick-13.github.io/mesto/
 
 ## Цель проекта:
 * Освоение Java Script 
