@@ -32,9 +32,11 @@
       <div class="popup">
         <div class="popup__container">
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <form class="popup__form">
-            <input type="text" placeholder="Имя" class="popup__text popup__text_name">
-            <input type="text" placeholder="О себе" class="popup__text popup__text_occupation">
+          <form class="popup__form popup__form_profile" novalidate>
+            <input id="popup__text" type="text" placeholder="Имя" class="popup__text popup__text_name" minlength="2" maxlength="40" required>
+            <span id="popup__text-error" class="popup__text-error"></span>
+            <input id="popup__occupation" type="text" placeholder="О себе" class="popup__text popup__text_occupation" minlength="2" maxlength="200" required>
+            <span id="popup__occupation-error" class="popup__text-error">Im second mistake</span>
             <button class="popup__btn" type="submit">Сохранить</button>
           </form>
           <button class="popup__close-btn" type="button"></button>
@@ -70,5 +72,6 @@
       </li>
     </template>
     <script src="scripts/main.js"></script>
+    <script src="scripts/validate.js"></script>
   </body>
 </html>
