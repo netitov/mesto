@@ -86,7 +86,8 @@ const setEventListeners = (formProfile) => {
   // сделаем из них массив методом Array.from
   const inputList = Array.from(formProfile.querySelectorAll('.popup__text'));
   //const buttonElement = formElement.querySelector('.popup__btn');
-  const buttonElement =  Array.from(formElement.querySelectorAll('.popup__btn'));
+  const buttonElement = formElement.querySelector('.popup__btn');
+  const buttonSubmitCard = document.querySelector('.popup__btn-crd');
 
   // Обойдём все элементы полученной коллекции
   inputList.forEach((formInput) => {
@@ -95,7 +96,7 @@ const setEventListeners = (formProfile) => {
       // Внутри колбэка вызовем isValid,
       // передав ей форму и проверяемый элемент
       checkInputValidity(formProfile, formInput);
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, buttonSubmitCard);
     });
   });
 };
@@ -137,13 +138,15 @@ const hasInvalidInput = (inputList) => {
 };
 
 // Стилизация кнопки формы
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, buttonSubmitCard) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
     buttonElement.classList.add('popup__btn_inactive');
+    buttonSubmitCard.classList.add('popup__btn_inactive');
   } else {
         // иначе сделай кнопку активной
     buttonElement.classList.remove('popup__btn_inactive');
+    buttonSubmitCard.classList.remove('popup__btn_inactive');
   }
 };
