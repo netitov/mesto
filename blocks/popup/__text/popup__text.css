@@ -22,7 +22,7 @@
     padding-bottom: 12px;
 
   }
-  .popup__text:first-of-type {
+  .popup__text:last-of-type {
     margin-top: 20px;
   }
 }

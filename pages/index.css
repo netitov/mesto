@@ -14,5 +14,6 @@
 @import url(../blocks/popup/__text-error/popup__text-error.css);
 @import url(../blocks/popup/__text-error/_visible/popup__text-error_visible.css);
 @import url(../blocks/popup/__text/_type_error/popup__text_type_error.css);
+@import url(../blocks/popup/__btn/_inactive/popup__btn_inactive.css);
 
 

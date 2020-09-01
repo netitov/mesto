@@ -46,8 +46,8 @@
         <div class="popup__container">
           <h2 class="popup__heading">Новое место</h2>
           <form class="popup__form popup__form_card">
-            <input type="text" placeholder="Название" class="popup__text popup__text_place">
-            <input type="text" placeholder="Ссылка на картинку" class="popup__text popup__text_link">
+            <input type="text" placeholder="Название" class="popup__text popup__text_place" minlength="1" maxlength="30" required>
+            <input type="url" placeholder="Ссылка на картинку" class="popup__text popup__text_link" required>
           <button class="popup__btn popup__btn-crd" type="submit">Создать</button>
           </form>
           <button class="popup__close-btn" type="button"></button>
