@@ -1,50 +1,9 @@
-// включение валидации вызовом enableValidation
-// все настройки передаются при вызове
 
-//enableValidation({
-//  formSelector: '.popup__form',
-//  inputSelector: '.popup__input',
-//  submitButtonSelector: '.popup__button',
-//  inactiveButtonClass: 'popup__button_disabled',
-//  inputErrorClass: 'popup__text_type_error',
-//  errorClass: 'popup__text-error_visible'
-//});
-
-//
-
+//Первонач план
 const formProfile = document.querySelector('.popup__form');
 const formInput = formProfile.querySelector('.popup__text');
 const formError = formProfile.querySelector(`#${formInput.id}-error`);
 
-/*const showError = (input, errorMessage) => {
-  input.classList.add('popup__text_type_error');
-  formError.textContent = errorMessage;
-  formError.classList.add('popup__text-error_visible');
-};
-
-const hideError = (input) => {
-  input.classList.remove('popup__text_type_error');
-  // 1. Удалите активный класс ошибки c formError.
-  formError.classList.remove('popup__text-error_visible');
-  // 2. Очистите свойство textContent элемента formError.
-  formError.textContent = '';
-};
-
-const checkInputValidity = () => {
-  if (!formInput.validity.valid) {
-    showError(formInput, formInput.validationMessage);
-  } else {
-    hideError(formInput);
-  }
-};
-
-formProfile.addEventListener('submit', function (evt) {
-  evt.preventDefault();
-});
-
-formInput.addEventListener('input', function () {
-  checkInputValidity();
-});*/
 
 const showError = (formProfile, formInput, errorMessage) => {
   const formError = formProfile.querySelector(`#${formInput.id}-error`);
@@ -74,11 +33,6 @@ formProfile.addEventListener('submit', function (evt) {
   evt.preventDefault();
 });
 
-/*formInput.addEventListener('input', function () {
-  checkInputValidity();
-});*/
-
-
 //добавление обработчика всем полям формы
 
 const setEventListeners = (formProfile) => {
@@ -103,10 +57,10 @@ const setEventListeners = (formProfile) => {
 
 //добавление обработчика формам
 
-const enableValidation = () => {
+const enableValidation = (obj) => {
   // Найдём все формы с указанным классом в DOM,
   // сделаем из них массив методом Array.from
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  const formList = Array.from(document.querySelectorAll(obj.formSelector));
 
   // Переберём полученную коллекцию
   formList.forEach((formProfile) => {
@@ -122,7 +76,15 @@ const enableValidation = () => {
 };
 
 // Вызовем функцию
-enableValidation();
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__text',
+  submitButtonSelector: '.popup__btn',
+  submitButtonSelector: '.popup__btn-crd',  
+  inactiveButtonClass: 'popup__btn_inactive',
+  inputErrorClass: 'popup__text_type_error',
+  errorClass: 'popup__text-error_visible'
+});
 
 
 // Наличие невалидных полей в форме
