@@ -36,7 +36,7 @@
             <input id="popup__text" type="text" placeholder="Имя" class="popup__text popup__text_name" minlength="2" maxlength="40" required>
             <span id="popup__text-error" class="popup__text-error"></span>
             <input id="popup__occupation" type="text" placeholder="О себе" class="popup__text popup__text_occupation" minlength="2" maxlength="200" required>
-            <span id="popup__occupation-error" class="popup__text-error">Im second mistake</span>
+            <span id="popup__occupation-error" class="popup__text-error"></span>
             <button class="popup__btn" type="submit">Сохранить</button>
           </form>
           <button class="popup__close-btn" type="button"></button>
@@ -46,8 +46,10 @@
         <div class="popup__container">
           <h2 class="popup__heading">Новое место</h2>
           <form class="popup__form popup__form_card">
-            <input type="text" placeholder="Название" class="popup__text popup__text_place" minlength="1" maxlength="30" required>
-            <input type="url" placeholder="Ссылка на картинку" class="popup__text popup__text_link" required>
+            <input id="popup__text" type="text" placeholder="Название" class="popup__text popup__text_place" minlength="1" maxlength="30" required>
+            <span id="popup__text-error" class="popup__text-error"></span>
+            <input id="popup__occupation" type="url" placeholder="Ссылка на картинку" class="popup__text popup__text_link" required>
+            <span id="popup__occupation-error" class="popup__text-error"></span>
           <button class="popup__btn popup__btn-crd" type="submit">Создать</button>
           </form>
           <button class="popup__close-btn" type="button"></button>

@@ -10,7 +10,9 @@
 //  errorClass: 'popup__text-error_visible'
 //});
 
-const formProfile = document.querySelector('.popup__form_profile');
+//
+
+const formProfile = document.querySelector('.popup__form');
 const formInput = formProfile.querySelector('.popup__text');
 const formError = formProfile.querySelector(`#${formInput.id}-error`);
 
@@ -83,8 +85,9 @@ const setEventListeners = (formProfile) => {
   // Находим все поля внутри формы,
   // сделаем из них массив методом Array.from
   const inputList = Array.from(formProfile.querySelectorAll('.popup__text'));
-  const buttonElement = formElement.querySelector('.popup__btn');
-  
+  //const buttonElement = formElement.querySelector('.popup__btn');
+  const buttonElement =  Array.from(formElement.querySelectorAll('.popup__btn'));
+
   // Обойдём все элементы полученной коллекции
   inputList.forEach((formInput) => {
     // каждому полю добавим обработчик события input
@@ -122,7 +125,6 @@ enableValidation();
 
 
 // Наличие невалидных полей в форме
-
 const hasInvalidInput = (inputList) => {
   // проходим по этому массиву методом some
   return inputList.some((formInput) => {
@@ -134,9 +136,7 @@ const hasInvalidInput = (inputList) => {
   })
 };
 
-
 // Стилизация кнопки формы
-
 const toggleButtonState = (inputList, buttonElement) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
