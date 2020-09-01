@@ -24,7 +24,13 @@ const closePopup = (event) => {
 
 popupEditButton.addEventListener('click', popupAdd);
 popupCloseButton.addEventListener('click', popupRemove);
-popup.addEventListener('click', closePopup);
+popup.addEventListener('mousedown', closePopup);
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    popup.classList.remove('popup_opened');
+  }
+});
 
 
 const formElement = document.querySelector('.popup__container');
@@ -121,6 +127,13 @@ const addCard = (card) => {
     if (event.target !== event.currentTarget) return
     popupImg.classList.remove('popup-image_active')
   })
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Escape') {
+      popupImg.classList.remove('popup-image_active')
+    }
+  });
+
  }
 
 initialCards.forEach(addCard)
@@ -147,8 +160,13 @@ const closePopupCard = function(event) {
 
 popupAddButton.addEventListener('click', popupCardAdd);
 popupCardCloseButton.addEventListener('click', popupCardRemove);
-popupCard.addEventListener('click', closePopupCard);
+popupCard.addEventListener('mousedown', closePopupCard);
 
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    popupCard.classList.remove('popup_opened');
+  }
+});
 
 //Добавление новой карточки
 const CardAddPopup = document.querySelector('.popup__form_card')
