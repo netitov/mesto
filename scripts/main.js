@@ -8,46 +8,73 @@ const nameProfile = document.querySelector('.profile__name');
 const occupationProfile = document.querySelector('.profile__occupation');
 
 //Функция открытия всех попапов
-const popupOpener = (element,cls) => {
-  element.classList.add(cls);
+const popupOpener = (element) => {
+  element.classList.add('popup_opened');
+  document.addEventListener('keydown', function () {
+    popupRemoverEsc(event,popup)
+});
+  document.addEventListener('keydown', function () { 
+    popupRemoverEsc(event,popupImg)
+  });
+  document.addEventListener('keydown', function () {
+    popupRemoverEsc(event,popupCard)
+    })
+  popup.addEventListener('mousedown', function () {
+    popupRemoverOverley (event,popup)
+  });
+  popupImgСlose.addEventListener('click', function () { 
+    popupRemoverOverley(event,popupImg)
+    });
+  popupCard.addEventListener('mousedown', function () {
+    popupRemoverOverley (event,popupCard)});
 }
 
 //Функция закрытия всех попапов по кнопке
-const popupRemover = (element,cls) => {
-  element.classList.remove(cls);
+const popupRemover = (element) => {
+  element.classList.remove('popup_opened');
+  document.removeEventListener('keydown', function () {
+    popupRemoverEsc(event,popup)
+});
+  document.removeEventListener('keydown', function () { 
+    popupRemoverEsc(event,popupImg)
+  });
+  document.removeEventListener('keydown', function () {
+    popupRemoverEsc(event,popupCard)
+    })
+  popup.removeEventListener('mousedown', function () {
+    popupRemoverOverley (event,popup)
+  });
+  popupImgСlose.removeEventListener('click', function () { 
+    popupRemoverOverley(event,popupImg)
+    });
+  popupCard.removeEventListener('mousedown', function () {
+    popupRemoverOverley (event,popupCard)});
 }
 
 //Функция закрытия всех попапов по оверлей
-const popupRemoverOverley = (event,element,cls) => {
+const popupRemoverOverley = (event,element) => {
   if (event.target !== event.currentTarget)
   return
-  popupRemover(element,cls)
+  popupRemover(element)
 }
 
 //Функция закрытия всех попапов по Esc
-const popupRemoverEsc = (evt,element,cls) => {
+const popupRemoverEsc = (evt,element) => {
   if (evt.key === 'Escape') {
-    element.classList.remove(cls);
+    popupRemover(element);
   }
 }
 
 
 popupEditButton.addEventListener('click', () => {
-  popupOpener(popup,'popup_opened');
+  popupOpener(popup);
   nameInput.value = nameProfile.textContent;
   jobInput.value = occupationProfile.textContent;
-  document.addEventListener('keydown', function () {
-    popupRemoverEsc(event,popup,'popup_opened')
-});
 });
 
 
 popupCloseButton.addEventListener('click', function () {
-  popupRemover(popup, 'popup_opened') 
-});
-
-popup.addEventListener('mousedown', function () {
-popupRemoverOverley (event,popup,'popup_opened')
+  popupRemover(popup) 
 });
 
 
@@ -57,7 +84,7 @@ function formSubmitHandler (evt) {
 
     nameProfile.textContent = nameInput.value;
     occupationProfile.textContent = jobInput.value;
-    popupRemover(popup,'popup_opened');
+    popupRemover(popup);
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
@@ -104,49 +131,44 @@ const handleLikeIcon = (event) => {
 
 //Функция удаление карточек
 const handleDeleteCard = (el) => {
-  //el.classList.add('elements__element_inactive')
   el.remove();
 }
 
-const popupImgСlose = document.querySelector('.popup-image__close-btn');
-
-/*//Функция закрытия фото по Esc
-const escClosePopup = (evt) => {
-  if (evt.key === 'Escape') {
-    popupImg.classList.remove('popup-image_active');
-  }
+//Функция Рендер карточек
+const cardsRender = (el, list) => {
+  el.prepend(list);
 }
 
-//Функция закрытия фото по кнопке
-const popupImgСlose = document.querySelector('.popup-image__close-btn');
-const handleCloseImg = () => {
-  popupImg.classList.remove('popup-image_active')
+//Функция превью карточки
+const cardsPreview = (card) => {
+  popupOpener(popupImg);
+  popupPicTitle.textContent = card.name;
+  popupPicSrc.src = card.link;
+  popupPicSrc.setAttribute('alt', "Изображение " + card.name);
 }
 
-//Функция закрытия фото по клику оверлей
-const handleCloseImgOverley = (event) => {
-  if (event.target !== event.currentTarget) return
-  popupImg.classList.remove('popup-image_active')
-}*/
 
+const popupImgСlose = document.querySelector('.popup-image__close-btn');
+const elementTemplate = document.querySelector('#cardsTemplate').content;
 
 //Добавление карточек при загрузке
 const addCard = (card) => {
-  const elementTemplate = document.querySelector('#cardsTemplate').content;
-  const addElement = elementTemplate.cloneNode(true);
   
-  addElement.querySelector('.elements__title').textContent = card.name
-  addElement.querySelector('.elements__img').src = card.link
-  //cardImg.setAttribute('alt', 'ИЗОБРАЖЕНИЕ')
+  const cardsList = elementTemplate.cloneNode(true);
+
+  const cardImg = cardsList.querySelector('.elements__img');
   
-  const likeButton = addElement.querySelector('.elements__like');
-  const deleteButton = addElement.querySelector('.elements__del');
-  const cardImg = addElement.querySelector('.elements__img');
+  cardsList.querySelector('.elements__title').textContent = card.name
+  cardImg.src = card.link
+
+  
+  const likeButton = cardsList.querySelector('.elements__like');
+  const deleteButton = cardsList.querySelector('.elements__del');
   const deleteCard = deleteButton.closest('.elements__element')
 
   cardImg.setAttribute('alt', 'Добавленное изображение')
 
-  elementContainer.prepend(addElement)
+  cardsRender (elementContainer, cardsList)
 
   likeButton.addEventListener('click', handleLikeIcon);
 
@@ -154,55 +176,30 @@ const addCard = (card) => {
    handleDeleteCard(deleteCard)});
 
   cardImg.addEventListener('click', function () {
-    popupOpener(popupImg,'popup-image_active');
-    popupPicTitle.textContent = card.name;
-    popupPicSrc.src = card.link;
-    document.addEventListener('keydown', function () { 
-      popupRemoverEsc(event,popupImg,'popup-image_active')
-      });
-  });
-
-  popupImgСlose.addEventListener('click', function () { 
-  popupRemoverOverley(event,popupImg,'popup-image_active')
-  });
-
-  popupImg.addEventListener('click', function () {
-    popupRemover(popupImg,'popup-image_active')
+    cardsPreview(card)
   });
 
  }
 
 initialCards.forEach(addCard)
 
+popupImg.addEventListener('click', function () {
+  popupRemover(popupImg)
+});
 
 //Открытие и закрытие попап добавления карточек
 const popupCard = document.querySelector('.popup_card');
 const popupAddButton = document.querySelector('.profile__add-button');
 const popupCardCloseButton = popupCard.querySelector('.popup__close-btn');
 
-
-/*const popupCardRemove = function () {
-  popupCard.classList.remove('popup_opened');
-}
-
-const closePopupCard = function(event) {
-  if (event.target !== event.currentTarget) return
-  popupCardRemove(event);
-}*/
-
 popupAddButton.addEventListener('click', function () {
-  popupOpener(popupCard,'popup_opened')
-  document.addEventListener('keydown', function () {
-    popupRemoverEsc(event,popupCard,'popup_opened')
-    })
+  popupOpener(popupCard)
 });
 
 
 popupCardCloseButton.addEventListener('click', function () {
-popupRemover(popupCard,'popup_opened')});
+popupRemover(popupCard)});
 
-popupCard.addEventListener('mousedown', function () {
-popupRemoverOverley (event,popupCard,'popup_opened')});
 
 
 //Добавление новой карточки
@@ -220,7 +217,7 @@ CardAddPopup.addEventListener('submit', event => {
 
   CardAddPopup.reset()
 
-  popupRemover(popupCard,'popup_opened')
+  popupRemover(popupCard)
 
 })
 
