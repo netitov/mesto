@@ -1,4 +1,3 @@
-const formProfile = document.querySelector('.popup__form');
 
 const elementList = {
   formSelector: '.popup__form',
@@ -59,6 +58,17 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
     buttonElement.disabled = false;
   }
 };
+
+//Сброс стиля кнопки для попап
+const resetPopup = (element, {formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, ...rest}) => {
+  const inputList = Array.from(element.querySelectorAll(inputSelector));
+  const buttonElement = element.querySelector(submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+  inputList.forEach((inputSelector) => {
+    toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+  })
+}
+
 
 //добавление обработчика всем полям формы
 
