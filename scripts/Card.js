@@ -1,8 +1,8 @@
 export class Card {
-  constructor(card, cardSelector, openPopup, popupImg, popupPicTitle, popupPicSrc) {
+  constructor(card, elementTemplate, openPopup, popupImg, popupPicTitle, popupPicSrc) {
     this._name = card.name;
     this._link = card.link;
-    this._cardSelector = cardSelector;
+    this._elementTemplate = elementTemplate;
     this._openPopup = openPopup;
     this._popupImg = popupImg;
     this._popupPicTitle = popupPicTitle;
@@ -11,7 +11,7 @@ export class Card {
 
   _getTemplate() { 
     const cardElement = document
-      .querySelector('#cardsTemplate')
+      .querySelector(this._elementTemplate)
       .content
       .cloneNode(true);
 
