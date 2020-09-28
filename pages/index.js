@@ -1,5 +1,7 @@
-import { Card } from './Card.js'
-import { elementList, FormValidator } from './FormValidator.js'
+import { Card } from '../components/Card.js'
+import { elementList, FormValidator } from '../components/FormValidator.js'
+import { Section } from '../components/Section.js'
+import { Popup } from '../components/Popup.js'
 
 
 const popup = document.querySelector('.popup');
@@ -61,8 +63,8 @@ const initialCards = [
 //Функция открытия всех попапов
 const openPopup = (element) => {
   element.classList.add('popup_opened');
-  document.addEventListener('mousedown', removePopupOverlay);  
-  document.addEventListener('keydown', removePopupEsc); 
+  document.addEventListener('mousedown', removePopupOverlay);
+  document.addEventListener('keydown', removePopupEsc);
 }
 
 //Функция закрытия всех попапов
@@ -88,7 +90,7 @@ const removePopupEsc = (evt) => {
 }
 
 function formSubmitHandler (evt) {
-  evt.preventDefault(); 
+  evt.preventDefault();
 
   nameProfile.textContent = nameInput.value;
   occupationProfile.textContent = jobInput.value;
@@ -131,7 +133,7 @@ popupEditButton.addEventListener('click', () => {
 });
 
 popupCloseButton.addEventListener('click', function () {
-  removePopup(popup) 
+  removePopup(popup)
 });
 
 formElement.addEventListener('submit', formSubmitHandler);

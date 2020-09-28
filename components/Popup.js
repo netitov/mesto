@@ -5,13 +5,13 @@ export class Popup {
   }
    openPopup () {
     this._popupSelector.classList.add('popup_opened');
-    document.addEventListener('mousedown', removePopupOverlay); //??
+    document.addEventListener('mousedown', this._handleOverlayClose());
     document.addEventListener('keydown', this._handleEscClose());
    }
 
    closePopup () {
     this._popupSelector.classList.remove('popup_opened');
-    document.removeEventListener('mousedown', removePopupOverlay);//??
+    document.removeEventListener('mousedown', this._handleOverlayClose());
     document.removeEventListener('keydown', this._handleEscClose());
   }
 
@@ -33,12 +33,4 @@ export class Popup {
       this.closePopup(this._popupSelector)
     });
   }
-
 }
-
-/*
-Создайте класс Popup, который отвечает за открытие и закрытие попапа. Этот класс:
-Принимает в конструктор единственный параметр — селектор попапа.
-Содержит публичные методы open и close, которые отвечают за открытие и закрытие попапа.
-Содержит приватный метод _handleEscClose, который содержит логику закрытия попапа клавишей Esc.
-Содержит публичный метод setEventListeners, который добавляет слушатель клика иконке закрытия попапа.*/
