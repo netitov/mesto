@@ -1,14 +1,19 @@
-export class PopupWithImage {
-  constructor () {
-    this._items = items;
+import { Popup } from './Popup.js'
+
+export class PopupWithImage extends Popup {
+  constructor (popupSelector) {
+    super(popupSelector);
+    this._name = name;
+    this._link = link;
 
   }
+
+  openPopup ({ name, link }) {
+    super.popuPopen();
+    this._popupSelector.querySelector('.popup-image__title').textContent = name;
+    this._popupSelector.querySelector('.popup-image__picture').src = link;
+    this._popupSelector.querySelector('.popup-image__picture').alt = name;
+   }
+
 }
 
-
-
-
-/*
-Этот класс должен перезаписывать родительский метод open
-В методе open класса PopupWithImage нужно вставлять в попап картинку и атрибут src изображения и подпись к картинке
-*/
