@@ -2,7 +2,6 @@ export default class UserInfo {
   constructor ({ nameSelector, occupationSelector }) {
     this._nameSelector = nameSelector;
     this._occupationSelector = occupationSelector;
-
   }
 
   getUserInfo () {
@@ -15,7 +14,7 @@ export default class UserInfo {
 
   setUserInfo (input) {
     this._nameSelector = input.name;
-    this._occupationSelector = occupationSelector;
+    this._occupationSelector = input.occupationSelector;
   }
 
 }

@@ -1,5 +1,5 @@
-export class Card {
-  constructor(card, elementTemplate, openPopup, popupImg, popupPicTitle, popupPicSrc) {
+export default class Card {
+  constructor(card, elementTemplate, openPopup, popupImg, popupPicTitle, popupPicSrc, handleCardClick) {
     this._name = card.name;
     this._link = card.link;
     this._elementTemplate = elementTemplate;
@@ -7,9 +7,10 @@ export class Card {
     this._popupImg = popupImg;
     this._popupPicTitle = popupPicTitle;
     this._popupPicSrc = popupPicSrc;
+    this._handleCardClick = handleCardClick;
   }
 
-  _getTemplate() { 
+  _getTemplate() {
     const cardElement = document
       .querySelector(this._elementTemplate)
       .content
@@ -32,7 +33,9 @@ export class Card {
   _setEventListeners() {
     this._cardElement.querySelector('.elements__like').addEventListener('click', this._handleLikeIcon);
     this._cardElement.querySelector('.elements__del').addEventListener('click', this._handleDeleteCard);
-    this._cardImg.addEventListener('click', () => this._previewCards());    
+    this._cardImg.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link);
+    });
   }
 
 
@@ -41,14 +44,7 @@ export class Card {
   }
 
   _handleDeleteCard(evt) {
-    evt.target.closest('.elements__element').remove(); 
+    evt.target.closest('.elements__element').remove();
   }
 
-  _previewCards() {
-    this._openPopup(this._popupImg);
-    this._popupPicTitle.textContent = this._name;
-    this._popupPicSrc.src = this._link;
-    this._popupPicSrc.setAttribute('alt', `Изображение ${this._name}`);
-  }
-
-} 
+}
