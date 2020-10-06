@@ -6,9 +6,9 @@ export const nameInput = popup.querySelector('.popup__text_name');
 export const jobInput = popup.querySelector('.popup__text_occupation');
 export const nameProfile = document.querySelector('.profile__name');
 export const occupationProfile = document.querySelector('.profile__occupation');
-export const editProfileForm = document.querySelector('.popup__form_profile')
-export const cardAddPopup = document.querySelector('.popup__form_card')
-export const elementContainer = document.querySelector('.elements')
+export const editProfileForm = document.querySelector('.popup__form_profile');
+export const cardAddPopup = document.querySelector('.popup__form_card');
+export const elementContainer = document.querySelector('.elements');
 
 export const popupImg = document.querySelector('.popup-image');
 export const popupPicTitle = popupImg.querySelector('.popup-image__title');

@@ -31,80 +31,66 @@ import {
 const addCardValidator = new FormValidator(elementList, cardAddPopup);
 const editProfileValidator = new FormValidator(elementList, editProfileForm);
 const profilePopup = new PopupWithForm(popup, hanldeSubmitForm);
-const cardPopup = new PopupWithForm(popupCard, handleSubmitCard);
+const cardPopup = new PopupWithForm(popupCard, handleSubmitCard);//cardAddPopup
 const imagePopup = new PopupWithImage(popupImg);
-const userData = new UserInfo({ nameInput, jobInput });
+const userData = new UserInfo(nameProfile, occupationProfile);
 
 const cardsList = new Section ({
   data: initialCards,
-  renderer: (card) => {
-    addCards(card);
+  renderer: (data) => {
+    addCards(data);
   }
  }, elementContainer)
 
 
 //Редактирование профиля
-const hanldeSubmitForm = (input) => {
-  userData.setUserInfo(input);
-  profilePopup.closePopup()
-}
-
-//Добавление новой карточки
-const handleSubmitCard = (evt) => {
-  evt.preventDefault();
-  addCards(card);
-  popupCard.closePopup();
-}
-
-//Добавление карточек
-const addCards = (card) => {
-  const cardClass = new Card(card, '#cardsTemplate', openPopup, popupImg, popupPicTitle, popupPicSrc, handleCardClick);
-  const cardElement = cardClass.generateCard();
-  cardsList.addItem(cardElement)
-}
-
-//Превью карточки
-const handleCardClick = (name, link) => {
-  imagePopup.openPopup(name, link)
+function hanldeSubmitForm () {
+  userData.setUserInfo(nameInput, jobInput);
+  profilePopup.closePopup();
 }
 
 
 //Отрытие попап профиля
-const openProfile = () => {
+function openProfile () {
   profilePopup.openPopup();
-  userData.getUserInfo();
+  const profileValues = userData.getUserInfo();
+  nameInput.value = profileValues.name;
+  jobInput.value = profileValues.occupation;
   editProfileValidator.resetPopup(popup);
 }
 
-/*//Отрытие попап добавление карточки
-const cardPopup = () => {
-  cardPopup.openPopup();
-  userData.getUserInfo();
-  editProfileValidator.resetPopup(popup);
-}*/
 
-popupEditButton.addEventListener('click', openProfile());
+//Добавление карточек
+function addCards(card) {
+  const cardClass = new Card(card, '#cardsTemplate', handleCardClick);
+  const cardElement = cardClass.generateCard();
+  cardsList.addItem(cardElement);
+}
+
+
+//Добавление новой карточки
+function handleSubmitCard(card) {
+
+  const cards = {
+    name: cardAddInputText.value,
+    link: cardAddInputLink.value
+  }
+  addCards(cards);
+  cardPopup.closePopup();
+}
+
+
+//Превью карточки
+function handleCardClick (name, link) {
+  imagePopup.openPopup(name, link)
+}
+
+popupEditButton.addEventListener('click', openProfile);
 
 popupAddButton.addEventListener('click', function () {
   addCardValidator.resetPopup(popupCard);
   cardPopup.openPopup();
 });
-
-
-popupCloseButton.addEventListener('click', function () {
-  removePopup(popup)
-});
-
-//formElement.addEventListener('submit', hanldeSubmitForm);
-
-/*
-popupCardCloseButton.addEventListener('click', function () {
-  removePopup(popupCard)});
-popupImg.addEventListener('click', function () {
-  removePopup(popupImg)
-});*/
-
-//cardAddPopup.addEventListener('submit', handleSubmitCard);
 
 
 profilePopup.setEventListeners();
@@ -115,9 +101,8 @@ imagePopup.setEventListeners();
 addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
 
-addCards(initialCards);
-
 cardsList.renderItems();
+
 
 
 

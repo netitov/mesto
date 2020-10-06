@@ -1,20 +1,20 @@
 export default class UserInfo {
-  constructor ({ nameSelector, occupationSelector }) {
-    this._nameSelector = nameSelector;
-    this._occupationSelector = occupationSelector;
+  constructor (profileName, profileOccupat) {
+    this._profileName = profileName;
+    this._profileOccupat = profileOccupat;
   }
 
   getUserInfo () {
-    this._ProfileValues = {};
-    this._ProfileValues.name = this._nameSelector.textContent;
-    this._ProfileValues.value = this._occupationSelector.textContent;
+    this._profileValues = {};
+    this._profileValues.name = this._profileName.textContent;
+    this._profileValues.occupation = this._profileOccupat.textContent;
 
-    return this._ProfileValues;
+    return this._profileValues;
   }
 
-  setUserInfo (input) {
-    this._nameSelector = input.name;
-    this._occupationSelector = input.occupationSelector;
+  setUserInfo (nameInput, jobInput) {
+    this._profileName.textContent = nameInput.value;
+    this._profileOccupat.textContent = jobInput.value;
   }
 
 }
