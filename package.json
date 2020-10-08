@@ -1,0 +1,23 @@
+{
+  "name": "yandex_praktikum",
+  "version": "0.0.1",
+  "description": "https://t-nick-13.github.io/mesto/",
+  "main": "index.js",
+  "scripts": {
+    "build": "rd /s /q dist && webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/T-Nick-13/mesto.git"
+  },
+  "author": "Nikita Titov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/T-Nick-13/mesto/issues"
+  },
+  "homepage": "https://github.com/T-Nick-13/mesto#readme",
+  "devDependencies": {
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
+}
