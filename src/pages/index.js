@@ -1,10 +1,10 @@
-import './pages/index.css'
-import Card from './components/Card.js'
-import { elementList, FormValidator } from './components/FormValidator.js'
-import Section from './components/Section.js'
-import PopupWithImage from './components/PopupWithImage.js'
-import PopupWithForm from './components/PopupWithForm.js'
-import UserInfo from './components/UserInfo.js'
+import './index.css'
+import Card from '../components/Card.js'
+import { elementList, FormValidator } from '../components/FormValidator.js'
+import Section from '../components/Section.js'
+import PopupWithImage from '../components/PopupWithImage.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import UserInfo from '../components/UserInfo.js'
 import {
   popup,
   popupEditButton,
@@ -26,12 +26,12 @@ import {
   cardAddInputText,
   cardAddInputLink,
   initialCards
- } from './utils/constants.js'
+ } from '../utils/constants.js'
 
 
 const addCardValidator = new FormValidator(elementList, cardAddPopup);
 const editProfileValidator = new FormValidator(elementList, editProfileForm);
-const profilePopup = new PopupWithForm(popup, hanldeSubmitForm);
+const profilePopup = new PopupWithForm(popup, handleSubmitForm);
 const cardPopup = new PopupWithForm(popupCard, handleSubmitCard);//cardAddPopup
 const imagePopup = new PopupWithImage(popupImg);
 const userData = new UserInfo(nameProfile, occupationProfile);
@@ -45,7 +45,7 @@ const cardsList = new Section ({
 
 
 //Редактирование профиля
-function hanldeSubmitForm () {
+function handleSubmitForm () {
   userData.setUserInfo(nameInput, jobInput);
   profilePopup.closePopup();
 }
