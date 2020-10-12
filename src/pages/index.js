@@ -5,6 +5,7 @@ import Section from '../components/Section.js'
 import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js'
 import UserInfo from '../components/UserInfo.js'
+import PopupWithSubmit from '../components/PopupWithSubmit.js'
 import {
   popup,
   popupEditButton,
@@ -25,7 +26,9 @@ import {
   popupCardCloseButton,
   cardAddInputText,
   cardAddInputLink,
-  initialCards
+  initialCards,
+  popupWithSubmitForm,
+  deleteButton
  } from '../utils/constants.js'
 
 
@@ -35,6 +38,7 @@ const profilePopup = new PopupWithForm(popup, handleSubmitForm);
 const cardPopup = new PopupWithForm(popupCard, handleSubmitCard);//cardAddPopup
 const imagePopup = new PopupWithImage(popupImg);
 const userData = new UserInfo(nameProfile, occupationProfile);
+const submitPopup = new PopupWithSubmit(popupWithSubmitForm, handleSubmitForm);//CORRECT!
 
 const cardsList = new Section ({
   data: initialCards,
@@ -93,16 +97,23 @@ popupAddButton.addEventListener('click', function () {
   cardPopup.openPopup();
 });
 
+/*popupEditButton.addEventListener('click', function () {
+  submitPopup.openPopup();
+});*/
+
 
 profilePopup.setEventListeners();
 cardPopup.setEventListeners();
 imagePopup.setEventListeners();
+submitPopup.setEventListeners();
 
 
 addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
 
 cardsList.renderItems();
+
+
 
 
 

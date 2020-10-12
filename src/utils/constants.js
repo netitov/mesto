@@ -22,6 +22,8 @@ export const popupAddButton = document.querySelector('.profile__add-button');
 export const popupCardCloseButton = popupCard.querySelector('.popup__close-btn');
 export const cardAddInputText = cardAddPopup.querySelector('.popup__text_place');
 export const cardAddInputLink = cardAddPopup.querySelector('.popup__text_link');
+export const popupWithSubmitForm = document.querySelector('.popup-submit');
+
 
 export const initialCards = [
   {
