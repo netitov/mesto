@@ -6,6 +6,7 @@ import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js'
 import UserInfo from '../components/UserInfo.js'
 import PopupWithSubmit from '../components/PopupWithSubmit.js'
+import Api from '../components/Api.js'
 import {
   popup,
   popupEditButton,
@@ -40,6 +41,31 @@ const imagePopup = new PopupWithImage(popupImg);
 const userData = new UserInfo(nameProfile, occupationProfile);
 const submitPopup = new PopupWithSubmit(popupWithSubmitForm, handleSubmitForm);//CORRECT!
 
+const api = new Api ({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-16',
+  headers: {
+    authorization: '26c6e873-4075-4038-96d8-f1cc54cdc871',
+    'content-type': 'application/json'
+  }
+});
+
+
+
+//rendering Cards from server
+const initCards = api.getInitialCards();
+
+initCards.then((data) => {
+  const cardsLists = new Section ({
+    items: data,
+    renderer: (items) => {
+      addCards(items);
+    }
+   }, elementContainer, api);
+   cardsLists.renderItems();
+})
+.catch((error) => alert(error))//show error if something wrong
+
+
 const cardsList = new Section ({
   data: initialCards,
   renderer: (data) => {
@@ -64,8 +90,7 @@ function openProfile () {
   editProfileValidator.resetPopup(popup);
 }
 
-
-//Добавление карточек
+//test add new card
 function addCards(card) {
   const cardClass = new Card(card, '#cardsTemplate', handleCardClick);
   const cardElement = cardClass.generateCard();
@@ -73,7 +98,7 @@ function addCards(card) {
 }
 
 
-//Добавление новой карточки
+/*//Добавление новой карточки
 function handleSubmitCard(card) {
 
   const cards = {
@@ -82,6 +107,18 @@ function handleSubmitCard(card) {
   }
   addCards(cards);
   cardPopup.closePopup();
+}*/
+
+function handleSubmitCard(card) {
+  const cards = {
+    name: cardAddInputText.value,
+    link: cardAddInputLink.value
+  }
+  api.saveNewCard(cards)
+    .then((data) => {
+      addCards(cards);
+      cardPopup.closePopup();
+    })
 }
 
 
@@ -111,7 +148,7 @@ submitPopup.setEventListeners();
 addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
 
-cardsList.renderItems();
+//cardsList.renderItems();
 
 
 
