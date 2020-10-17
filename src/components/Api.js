@@ -4,15 +4,19 @@ export default class Api {
     this._headers = config.headers;
   }
 
+  _checkServerResponse(res) {
+    if (res.ok) {
+      return res.json()
+    }
+    return Promise.reject('Some error')
+  }
+
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: this._headers
     })
     .then((res) => {
-      if (res.ok) {
-        return res.json() //обязательно ретерн при зен
-      }
-      return Promise.reject('Some error')
+      return this._checkServerResponse(res)
     });
   }
 
@@ -23,12 +27,57 @@ export default class Api {
       body: JSON.stringify(data)
     })
     .then((res) => {
-      if (res.ok) {
-        return res.json() //make in seperate function?
-      }
-      return Promise.reject('Some error')
+      return this._checkServerResponse(res)
     });
   }
+
+  deleteCard(data) {
+    return fetch(`${this._url}/cards/${card._id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    })
+    .then((res) => {
+      return this._checkServerResponse(res)
+    });
+  }
+
+
+  getUserData() {
+    return fetch(`${this._url}/users/me`, {
+      headers: this._headers
+    })
+    .then((res) => {
+      return this._checkServerResponse(res)
+    });
+  }
+
+  saveUserData(data) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    })
+    .then((res) => {
+      return this._checkServerResponse(res)
+    });
+  }
+
+  /*
+  saveUserData({ name, about }) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about
+       })
+    })
+    .then((res) => {
+      return this._checkServerResponse(res)
+    });
+  }
+  */
 
 }
 

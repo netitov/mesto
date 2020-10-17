@@ -1,4 +1,5 @@
 .elements__del {
+  visibility: hidden;
   width: 18px;
   height: 19.3px;
   background-image: url(../../../images/Group.svg);
@@ -13,7 +14,7 @@
   position: absolute;
   top: 18px;
   left: 249px;
-  
+
 }
 
 .elements__del:hover {

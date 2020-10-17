@@ -29,7 +29,8 @@ import {
   cardAddInputLink,
   initialCards,
   popupWithSubmitForm,
-  deleteButton
+  deleteButton,
+  avatarProfile
  } from '../utils/constants.js'
 
 
@@ -38,8 +39,10 @@ const editProfileValidator = new FormValidator(elementList, editProfileForm);
 const profilePopup = new PopupWithForm(popup, handleSubmitForm);
 const cardPopup = new PopupWithForm(popupCard, handleSubmitCard);//cardAddPopup
 const imagePopup = new PopupWithImage(popupImg);
-const userData = new UserInfo(nameProfile, occupationProfile);
-const submitPopup = new PopupWithSubmit(popupWithSubmitForm, handleSubmitForm);//CORRECT!
+//const userData = new UserInfo(nameProfile, occupationProfile);
+const userData = new UserInfo(nameProfile, occupationProfile, avatarProfile);
+const submitPopup = new PopupWithSubmit(popupWithSubmitForm, handleSubmitForm);
+
 
 const api = new Api ({
   url: 'https://mesto.nomoreparties.co/v1/cohort-16',
@@ -51,20 +54,8 @@ const api = new Api ({
 
 
 
-//rendering Cards from server
 const initCards = api.getInitialCards();
-
-initCards.then((data) => {
-  const cardsLists = new Section ({
-    items: data,
-    renderer: (items) => {
-      addCards(items);
-    }
-   }, elementContainer, api);
-   cardsLists.renderItems();
-})
-.catch((error) => alert(error))//show error if something wrong
-
+const userDataFromServer = api.getUserData();
 
 const cardsList = new Section ({
   data: initialCards,
@@ -74,11 +65,70 @@ const cardsList = new Section ({
  }, elementContainer)
 
 
+//Add profile data from server
+userDataFromServer.then((dataUser) => {
+  userData.setUserInfo(dataUser)
+})
+.catch((error) => console.log(error))
+
+
+//rendering Cards from server
+initCards.then((data) => {
+  const cardsLists = new Section ({
+    items: data,
+    renderer: (items) => {
+      addCards(items);
+    }
+   }, elementContainer, api);
+   cardsLists.renderItems();
+})
+.catch((error) => console.log(error))
+
+
+//Callback add profiles data
+function handleSubmitForm (data) {
+  const inpitValues = {
+    name: nameInput.value,
+    about: jobInput.value
+  }
+  api.saveUserData(inpitValues)
+    .then((inpitValues) => {
+      userData.setUserInfo(inpitValues);
+      profilePopup.closePopup();
+    })
+}
+
+/*
+//Callback add profiles data
+function handleSubmitForm (data) {
+  api.saveUserData(data)
+    .then((dataUser) => {
+      userData.setUserInfo(dataUser);
+      profilePopup.closePopup();
+    })
+}
+*/
+
+/*
+function handleSubmitCard(card) {
+  const cards = {
+    name: cardAddInputText.value,
+    link: cardAddInputLink.value
+  }
+  api.saveNewCard(cards)
+    .then((data) => {
+      addCards(cards);
+      cardPopup.closePopup();
+    })
+}*/
+
+/*
 //Редактирование профиля
 function handleSubmitForm () {
   userData.setUserInfo(nameInput, jobInput);
   profilePopup.closePopup();
 }
+*/
 
 
 //Отрытие попап профиля
@@ -98,17 +148,7 @@ function addCards(card) {
 }
 
 
-/*//Добавление новой карточки
-function handleSubmitCard(card) {
-
-  const cards = {
-    name: cardAddInputText.value,
-    link: cardAddInputLink.value
-  }
-  addCards(cards);
-  cardPopup.closePopup();
-}*/
-
+//Добавление новой карточки NEW
 function handleSubmitCard(card) {
   const cards = {
     name: cardAddInputText.value,

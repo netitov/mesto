@@ -1,7 +1,8 @@
 export default class UserInfo {
-  constructor (profileName, profileOccupat) {
+  constructor (profileName, profileOccupat, profileAvatar) {
     this._profileName = profileName;
     this._profileOccupat = profileOccupat;
+    this._profileAvatar = profileAvatar;
   }
 
   getUserInfo () {
@@ -12,9 +13,24 @@ export default class UserInfo {
     return this._profileValues;
   }
 
-  setUserInfo (nameInput, jobInput) {
-    this._profileName.textContent = nameInput.value;
-    this._profileOccupat.textContent = jobInput.value;
+  setUserInfo (inputValues, _id) {
+    this._id = _id;
+
+    this._profileName.textContent = inputValues.name;
+    this._profileOccupat.textContent = inputValues.about;
+    this._profileAvatar.src = inputValues.avatar;
+
   }
+
+  /*
+  setUserInfo ({ name, about, avatar, _id }) {
+    this._id = _id;
+
+    this._profileName.textContent = name;
+    this._profileOccupat.textContent = about;
+    this._profileAvatar.src = avatar;
+
+  }
+  */
 
 }
