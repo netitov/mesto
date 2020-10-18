@@ -7,10 +7,11 @@ export const jobInput = popup.querySelector('.popup__text_occupation');
 export const nameProfile = document.querySelector('.profile__name');
 export const occupationProfile = document.querySelector('.profile__occupation');
 export const editProfileForm = document.querySelector('.popup__form_profile');
-export const avatarProfile = document.querySelector('.profile__avatar');
+export const avatarProfile = document.querySelector('.profile__avatar_overlay');
 
 export const cardAddPopup = document.querySelector('.popup__form_card');
 export const elementContainer = document.querySelector('.elements');
+export const binBtn = document.querySelector('.elements__del');
 
 
 export const popupImg = document.querySelector('.popup-image');
@@ -25,6 +26,9 @@ export const popupCardCloseButton = popupCard.querySelector('.popup__close-btn')
 export const cardAddInputText = cardAddPopup.querySelector('.popup__text_place');
 export const cardAddInputLink = cardAddPopup.querySelector('.popup__text_link');
 export const popupWithSubmitForm = document.querySelector('.popup-submit');
+export const popupAvatar = document.querySelector('.popup-avatar');
+export const avatarInputLink = popupAvatar.querySelector('.popup__text_link');
+export const avatarProfileSrc = document.querySelector('.profile__avatar');
 
 
 export const initialCards = [

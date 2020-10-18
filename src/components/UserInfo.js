@@ -14,7 +14,7 @@ export default class UserInfo {
   }
 
   setUserInfo (inputValues, _id) {
-    this._id = _id;
+    this.id = _id;
 
     this._profileName.textContent = inputValues.name;
     this._profileOccupat.textContent = inputValues.about;
@@ -22,15 +22,5 @@ export default class UserInfo {
 
   }
 
-  /*
-  setUserInfo ({ name, about, avatar, _id }) {
-    this._id = _id;
-
-    this._profileName.textContent = name;
-    this._profileOccupat.textContent = about;
-    this._profileAvatar.src = avatar;
-
-  }
-  */
 
 }

@@ -30,18 +30,23 @@ import {
   initialCards,
   popupWithSubmitForm,
   deleteButton,
-  avatarProfile
+  avatarProfile,
+  popupAvatar,
+  avatarInputLink,
+  avatarProfileSrc
  } from '../utils/constants.js'
 
 
 const addCardValidator = new FormValidator(elementList, cardAddPopup);
+const popupAvatarValidator = new FormValidator(elementList, popupAvatar);
 const editProfileValidator = new FormValidator(elementList, editProfileForm);
 const profilePopup = new PopupWithForm(popup, handleSubmitForm);
 const cardPopup = new PopupWithForm(popupCard, handleSubmitCard);//cardAddPopup
 const imagePopup = new PopupWithImage(popupImg);
-//const userData = new UserInfo(nameProfile, occupationProfile);
-const userData = new UserInfo(nameProfile, occupationProfile, avatarProfile);
-const submitPopup = new PopupWithSubmit(popupWithSubmitForm, handleSubmitForm);
+const userData = new UserInfo(nameProfile, occupationProfile, avatarProfileSrc);
+const submitPopup = new PopupWithSubmit(popupWithSubmitForm, handleDeleteCard);
+//const cards = new Card(card, '#cardsTemplate', handleCardClick, userId, cardId);//add userId
+const avatarPopup = new PopupWithForm(popupAvatar, handleSubmitAvatar);
 
 
 const api = new Api ({
@@ -52,13 +57,25 @@ const api = new Api ({
   }
 });
 
+//myid = "1bcdb3a1f7a3da33ffa8d154"
+let userId = '';
+
+
+//Get User Id
+api.getUserData()
+  .then((data) => {
+    const profileData = data;
+    userId = profileData._id;
+  })
 
 
 const initCards = api.getInitialCards();
 const userDataFromServer = api.getUserData();
 
+
+
 const cardsList = new Section ({
-  data: initialCards,
+  data: initCards,
   renderer: (data) => {
     addCards(data);
   }
@@ -72,6 +89,7 @@ userDataFromServer.then((dataUser) => {
 .catch((error) => console.log(error))
 
 
+
 //rendering Cards from server
 initCards.then((data) => {
   const cardsLists = new Section ({
@@ -79,56 +97,38 @@ initCards.then((data) => {
     renderer: (items) => {
       addCards(items);
     }
-   }, elementContainer, api);
+   }, elementContainer);
    cardsLists.renderItems();
 })
 .catch((error) => console.log(error))
 
 
-//Callback add profiles data
+//Change Profile data callBack
 function handleSubmitForm (data) {
-  const inpitValues = {
+  const inputValues = {
     name: nameInput.value,
     about: jobInput.value
   }
-  api.saveUserData(inpitValues)
-    .then((inpitValues) => {
-      userData.setUserInfo(inpitValues);
+  api.saveUserData(inputValues)
+    .then((inputValues) => {
+      userData.setUserInfo(inputValues);
       profilePopup.closePopup();
     })
+    .catch((error) => console.log(error))
 }
 
-/*
-//Callback add profiles data
-function handleSubmitForm (data) {
-  api.saveUserData(data)
-    .then((dataUser) => {
-      userData.setUserInfo(dataUser);
-      profilePopup.closePopup();
-    })
-}
-*/
-
-/*
-function handleSubmitCard(card) {
-  const cards = {
-    name: cardAddInputText.value,
-    link: cardAddInputLink.value
+//Change avatar callback
+function handleSubmitAvatar(data) {
+  const inputValue = {
+    avatar: avatarInputLink.value
   }
-  api.saveNewCard(cards)
-    .then((data) => {
-      addCards(cards);
-      cardPopup.closePopup();
+  api.saveAvatar(inputValue)
+    .then((inputValue) => {
+      userData.setUserInfo(inputValue);
+      avatarPopup.closePopup();
     })
-}*/
-
-/*
-//Редактирование профиля
-function handleSubmitForm () {
-  userData.setUserInfo(nameInput, jobInput);
-  profilePopup.closePopup();
+    .catch((error) => console.log(error))
 }
-*/
 
 
 //Отрытие попап профиля
@@ -140,9 +140,32 @@ function openProfile () {
   editProfileValidator.resetPopup(popup);
 }
 
+
+/*//test add new card
+function addCards(card) {
+  const cardClass = new Card(card, '#cardsTemplate', handleCardClick, userId, handlePopupDelete);
+  const cardElement = cardClass.generateCard();
+  cardsList.addItem(cardElement);
+  tempCard = card;
+}*/
+
+//Delete cards
+function handleDeleteCard(cardElement, cardId) {
+  api.deleteCard(cardId)
+    .then(() =>{
+      cardElement.remove();
+      cardElement = null;
+      submitPopup.closePopup();
+    })
+}
+
 //test add new card
 function addCards(card) {
-  const cardClass = new Card(card, '#cardsTemplate', handleCardClick);
+  const cardClass = new Card(card, '#cardsTemplate', handleCardClick, userId, {
+    handleSubmitDelete: (cardElement) => {
+      submitPopup.openPopup(cardElement, card._id);
+    }
+  });
   const cardElement = cardClass.generateCard();
   cardsList.addItem(cardElement);
 }
@@ -167,11 +190,16 @@ function handleCardClick (name, link) {
   imagePopup.openPopup(name, link)
 }
 
+
 popupEditButton.addEventListener('click', openProfile);
 
 popupAddButton.addEventListener('click', function () {
   addCardValidator.resetPopup(popupCard);
   cardPopup.openPopup();
+});
+
+avatarProfile.addEventListener('click', function () {
+  avatarPopup.openPopup();
 });
 
 /*popupEditButton.addEventListener('click', function () {
@@ -183,10 +211,14 @@ profilePopup.setEventListeners();
 cardPopup.setEventListeners();
 imagePopup.setEventListeners();
 submitPopup.setEventListeners();
+avatarPopup.setEventListeners();
+
 
 
 addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
+popupAvatarValidator.enableValidation();
+
 
 //cardsList.renderItems();
 

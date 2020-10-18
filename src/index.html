@@ -12,9 +12,10 @@
       </header>
       <section class="profile page__profile">
         <div class="profile__container">
-          <img class="profile__avatar" src="./images/kusto.jpg" alt="Изображение аватар">
+          <div class ="profile__avatar_overlay"></div>
+          <img class="profile__avatar" src="#" alt="Изображение аватар">
           <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" class="profile__edit-button"></button>
             <p class="profile__occupation">Исследователь океана</p>
           </div>
@@ -71,6 +72,17 @@
           <button class="popup__close-btn" type="button"></button>
         </div>
       </div>
+
+      <div class="popup popup-avatar">
+        <div class="popup__container">
+          <h2 class="popup__heading">Обновить аватар</h2>
+          <form class="popup__form ">
+            <input id="input-link" type="url" placeholder="Ссылка на картинку" class="popup__text popup__text_link" required>
+            <span id="input-link-error" class="popup__text-error"></span>
+          <button class="popup__btn popup__btn-crd" type="submit">Сохранить</button>
+          </form>
+          <button class="popup__close-btn" type="button"></button>
+        </div>
 
 
     </div>

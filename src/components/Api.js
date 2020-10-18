@@ -20,7 +20,7 @@ export default class Api {
     });
   }
 
-  saveNewCard(data) {
+    saveNewCard(data) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
@@ -31,11 +31,10 @@ export default class Api {
     });
   }
 
-  deleteCard(data) {
-    return fetch(`${this._url}/cards/${card._id}`, {
+  deleteCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
-      body: JSON.stringify(data)
+      headers: this._headers
     })
     .then((res) => {
       return this._checkServerResponse(res)
@@ -63,21 +62,18 @@ export default class Api {
     });
   }
 
-  /*
-  saveUserData({ name, about }) {
-    return fetch(`${this._url}/users/me`, {
+  saveAvatar(data) {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({
-        name: name,
-        about: about
-       })
+      body: JSON.stringify(data)
     })
     .then((res) => {
       return this._checkServerResponse(res)
     });
   }
-  */
+
+
 
 }
 
