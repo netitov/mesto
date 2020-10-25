@@ -10,7 +10,6 @@ import Api from '../components/Api.js'
 import {
   popup,
   popupEditButton,
-  popupCloseButton,
   nameInput,
   jobInput,
   nameProfile,
@@ -19,17 +18,11 @@ import {
   cardAddPopup,
   elementContainer,
   popupImg,
-  popupPicTitle,
-  popupPicSrc,
-  formElement,
   popupCard,
   popupAddButton,
-  popupCardCloseButton,
   cardAddInputText,
   cardAddInputLink,
-  initialCards,
   popupWithSubmitForm,
-  deleteButton,
   avatarProfile,
   popupAvatar,
   avatarInputLink,
@@ -44,8 +37,8 @@ const profilePopup = new PopupWithForm(popup, handleSubmitForm);
 const cardPopup = new PopupWithForm(popupCard, handleSubmitCard);//cardAddPopup
 const imagePopup = new PopupWithImage(popupImg);
 const userData = new UserInfo(nameProfile, occupationProfile, avatarProfileSrc);
+//const submitPopup = new PopupWithSubmit(popupWithSubmitForm, handleDeleteCard);
 const submitPopup = new PopupWithSubmit(popupWithSubmitForm, handleDeleteCard);
-//const cards = new Card(card, '#cardsTemplate', handleCardClick, userId, cardId);//add userId
 const avatarPopup = new PopupWithForm(popupAvatar, handleSubmitAvatar);
 
 
@@ -57,21 +50,19 @@ const api = new Api ({
   }
 });
 
-//myid = "1bcdb3a1f7a3da33ffa8d154"
+
 let userId = '';
 
-
-//Get User Id
 api.getUserData()
   .then((data) => {
-    const profileData = data;
-    userId = profileData._id;
+    const userDatas = data;
+    userId = data._id
   })
 
 
-const initCards = api.getInitialCards();
-const userDataFromServer = api.getUserData();
 
+const initCards = api.getInitialCards()
+const userDataFromServer = api.getUserData();
 
 
 const cardsList = new Section ({
@@ -87,7 +78,6 @@ userDataFromServer.then((dataUser) => {
   userData.setUserInfo(dataUser)
 })
 .catch((error) => console.log(error))
-
 
 
 //rendering Cards from server
@@ -141,28 +131,21 @@ function openProfile () {
 }
 
 
-/*//test add new card
-function addCards(card) {
-  const cardClass = new Card(card, '#cardsTemplate', handleCardClick, userId, handlePopupDelete);
-  const cardElement = cardClass.generateCard();
-  cardsList.addItem(cardElement);
-  tempCard = card;
-}*/
-
 //Delete cards
-function handleDeleteCard(cardElement, cardId) {
+function handleDeleteCard(element, cardId) {
   api.deleteCard(cardId)
     .then(() =>{
-      cardElement.remove();
-      cardElement = null;
+      element.remove();
+      element = null;
       submitPopup.closePopup();
     })
+    .catch((error) => console.log(error))
 }
 
 //test add new card
 function addCards(card) {
   const cardClass = new Card(card, '#cardsTemplate', handleCardClick, userId, {
-    handleSubmitDelete: (cardElement) => {
+    handlePopupDelete: (cardElement) => {
       submitPopup.openPopup(cardElement, card._id);
     }
   });
@@ -172,16 +155,17 @@ function addCards(card) {
 
 
 //Добавление новой карточки NEW
-function handleSubmitCard(card) {
+function handleSubmitCard() {
   const cards = {
     name: cardAddInputText.value,
     link: cardAddInputLink.value
   }
-  api.saveNewCard(cards)
-    .then((data) => {
-      addCards(cards);
+    api.saveNewCard(cards)
+    .then((card) => {
+      addCards(card);
       cardPopup.closePopup();
     })
+    .catch((error) => console.log(error))
 }
 
 

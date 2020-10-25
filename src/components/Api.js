@@ -11,6 +11,7 @@ export default class Api {
     return Promise.reject('Some error')
   }
 
+
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: this._headers

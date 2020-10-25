@@ -1,15 +1,13 @@
 export default class Card {
-  constructor(card, elementTemplate, handleCardClick, userId, {handleSubmitDelete}) {
+  constructor(card, elementTemplate, handleCardClick, userId, {handlePopupDelete}) {
     this._name = card.name;
     this._link = card.link;
     this._elementTemplate = elementTemplate;
     this._handleCardClick = handleCardClick;
-    this._id = card._id;
     this._userId = userId;
-    this._handleSubmitDelete = handleSubmitDelete;
+    this._handlePopupDelete = handlePopupDelete;
     this._card = card;
   }
-
 
 
   _getTemplate() {
@@ -33,11 +31,12 @@ export default class Card {
     this._cardTitle.alt = this._name;
 
 
-    if (this._userId === this._card.owner._id) {
+    if (this._card.owner._id === this._userId) {
       this._deletetBtn.classList.add('elements__del_active');
-}
+    }
 
     this._setEventListeners();
+
 
     return this._cardElement;
   }
@@ -45,7 +44,9 @@ export default class Card {
 
   _setEventListeners() {
     this._cardElement.querySelector('.elements__like').addEventListener('click', this._handleLikeIcon);
-    this._cardElement.querySelector('.elements__del').addEventListener('click', this._handleSubmitDelete);
+    this._deletetBtn.addEventListener('click', () => {
+      this._handlePopupDelete(this._cardElement)
+    });
     this._cardImg.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
@@ -56,14 +57,14 @@ export default class Card {
     evt.target.classList.toggle('elements__like_active')
   }
 
-  _handleDeleteCard(evt) {
+  /*_handleDeleteCard(evt) {
     evt.target.closest('.elements__element').remove();
-  }
+  }*/
 
-  removeCard() {
+  /*removeCard() {
     this._cardElement.remove();
     this._cardElement = null;
-  }
+  }*/
 
 
 }
