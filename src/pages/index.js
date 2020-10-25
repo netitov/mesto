@@ -131,22 +131,11 @@ function openProfile () {
 }
 
 
-//Delete cards
-function handleDeleteCard(element, cardId) {
-  api.deleteCard(cardId)
-    .then(() =>{
-      element.remove();
-      element = null;
-      submitPopup.closePopup();
-    })
-    .catch((error) => console.log(error))
-}
-
 //test add new card
 function addCards(card) {
   const cardClass = new Card(card, '#cardsTemplate', handleCardClick, userId, {
     handlePopupDelete: (cardElement) => {
-      submitPopup.openPopup(cardElement, card._id);
+      submitPopup.openPopup(cardElement, card._id)
     }
   });
   const cardElement = cardClass.generateCard();
@@ -169,11 +158,21 @@ function handleSubmitCard() {
 }
 
 
+//Delete cards
+function handleDeleteCard(cardElement, cardId) {
+  api.deleteCard(cardId)
+    .then(() => {
+      submitPopup.removeCard()
+      submitPopup.closePopup();
+    })
+    .catch((error) => console.log(error))
+}
+
+
 //Превью карточки
 function handleCardClick (name, link) {
   imagePopup.openPopup(name, link)
 }
-
 
 popupEditButton.addEventListener('click', openProfile);
 
@@ -186,9 +185,6 @@ avatarProfile.addEventListener('click', function () {
   avatarPopup.openPopup();
 });
 
-/*popupEditButton.addEventListener('click', function () {
-  submitPopup.openPopup();
-});*/
 
 
 profilePopup.setEventListeners();
@@ -198,13 +194,11 @@ submitPopup.setEventListeners();
 avatarPopup.setEventListeners();
 
 
-
 addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
 popupAvatarValidator.enableValidation();
 
 
-//cardsList.renderItems();
 
 
 

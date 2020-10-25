@@ -57,13 +57,10 @@ export default class Card {
     evt.target.classList.toggle('elements__like_active')
   }
 
-  /*_handleDeleteCard(evt) {
-    evt.target.closest('.elements__element').remove();
-  }*/
 
-  /*removeCard() {
-    this._cardElement.remove();
-    this._cardElement = null;
+
+  /*handleDeleteCard(evt) {
+    evt.target.closest('.elements__element').remove();
   }*/
 
 

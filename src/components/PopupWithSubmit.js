@@ -5,7 +5,6 @@ export default class PopupWithSubmit extends Popup {
     super(popupSelector);
     this._handleDeleteCard = handleDeleteCard;
     this._formElement = this._popupSelector.querySelector('.popup__form');
-
   }
 
   openPopup(element, data) {
@@ -14,13 +13,15 @@ export default class PopupWithSubmit extends Popup {
     this._data = data;
   }
 
-  setEventListeners () {
-    super.setEventListeners();
-    this._formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-       this._handleDeleteCard(this._element, this._data);//
-    })
+  removeCard() {
+    this._cardElement.remove();
   }
 
+  setEventListeners () {
+    super.setEventListeners();
+    this._formElement.addEventListener('submit', () => {
+      this._handleDeleteCard(this._element, this._data);
+    })
+  }
 }
 
