@@ -1,8 +1,8 @@
 .elements__like {
-  margin-right: 7px;
+  margin: 0;
+  margin-bottom: 3px;
   width: 21px;
   height: 18px;
-  margin-top: 6px;
   background-image: url(../../../images/Vector.svg);
   background-repeat: no-repeat;
   background-position: center;
