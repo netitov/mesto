@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(card, elementTemplate, handleCardClick, userId, {handlePopupDelete}) {
+  constructor(card, elementTemplate, handleCardClick, userId, {handlePopupDelete, setLike}) {
     this._name = card.name;
     this._link = card.link;
     this._elementTemplate = elementTemplate;
@@ -7,6 +7,7 @@ export default class Card {
     this._userId = userId;
     this._handlePopupDelete = handlePopupDelete;
     this._card = card;
+    this._setLike = setLike;
   }
 
 
@@ -25,6 +26,8 @@ export default class Card {
     this._cardImg = this._cardElement.querySelector('.elements__img');
     this._cardTitle = this._cardElement.querySelector('.elements__title');
     this._deletetBtn = this._cardElement.querySelector('.elements__del');
+    this._likeSum = this._cardElement.querySelector('.elements__like-counter');
+    this._likeIcon = this._cardElement.querySelector('.elements__like');
 
     this._cardImg.src = this._link;
     this._cardTitle.textContent = this._name;
@@ -35,15 +38,21 @@ export default class Card {
       this._deletetBtn.classList.add('elements__del_active');
     }
 
+    this._likeSum.textContent = this._card.likes.length
+
     this._setEventListeners();
+
+    this._isLiked()
 
 
     return this._cardElement;
+
   }
 
 
   _setEventListeners() {
-    this._cardElement.querySelector('.elements__like').addEventListener('click', this._handleLikeIcon);
+    this._likeIcon.addEventListener('click', (evt) => {
+      this._setLike(evt, this._card, this._likeSum)});
     this._deletetBtn.addEventListener('click', () => {
       this._handlePopupDelete(this._cardElement)
     });
@@ -57,11 +66,34 @@ export default class Card {
     evt.target.classList.toggle('elements__like_active')
   }
 
-
-
-  /*handleDeleteCard(evt) {
-    evt.target.closest('.elements__element').remove();
+  /*updateLike() {
+    this._likeSum.textContent = this._card.likes.length;
+    this._likeIcon.classList.add('elements__like_active');
   }*/
+
+/*
+  _setLike(cardId) {
+    this._api.saveLike(cardId)
+      .then(() => {
+        this.updateLike();
+        //console.log(this._card.likes.length)
+      })
+      .then(() => {
+        this._likeIcon.classList.add('elements__like_active')
+      })
+      .catch((error) => console.log(error))
+
+  }*/
+
+
+  _isLiked() {
+    this._card.likes.forEach((likeOwner) => {
+      if (likeOwner._id === this._card.owner._id) {
+        this._likeIcon.classList.add('elements__like_active');
+      }
+    })
+  }
+
 
 
 }

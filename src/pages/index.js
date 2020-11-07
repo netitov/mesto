@@ -43,9 +43,9 @@ const avatarPopup = new PopupWithForm(popupAvatar, handleSubmitAvatar);
 
 
 const api = new Api ({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-16',
+  url: 'https://mesto.nomoreparties.co/v1/cohort-17',
   headers: {
-    authorization: '26c6e873-4075-4038-96d8-f1cc54cdc871',
+    authorization: 'd0f4e15e-5e8f-4105-8cb3-71e6a52f3645',
     'content-type': 'application/json'
   }
 });
@@ -131,16 +131,53 @@ function openProfile () {
 }
 
 
-//test add new card
 function addCards(card) {
   const cardClass = new Card(card, '#cardsTemplate', handleCardClick, userId, {
     handlePopupDelete: (cardElement) => {
       submitPopup.openPopup(cardElement, card._id)
+    },
+    setLike: (evt, card, likeSum) => {
+      const checkLikeOwner = card.likes.find((likeOwner) => {
+        return likeOwner._id === userId;
+      })
+
+      if(checkLikeOwner === undefined) {
+        setLike(evt, card, likeSum)
+
+      }
+      else {
+        deleteLike(evt, card, likeSum)
+      }
+
     }
   });
   const cardElement = cardClass.generateCard();
   cardsList.addItem(cardElement);
 }
+
+
+function updateLike (card, likeSum) {
+  likeSum.textContent = card.likes.length;
+}
+
+function setLike(evt, card, likeSum) {
+  api.saveLike(card._id)
+    .then((card) => {
+      evt.target.classList.add('elements__like_active');
+      updateLike(card, likeSum);
+    })
+    .catch((error) => console.log(error))
+}
+
+function deleteLike(evt, card, likeSum) {
+  api.deleteLike(card._id)
+    .then((card) => {
+      evt.target.classList.remove('elements__like_active');
+      updateLike(card, likeSum);
+    })
+    .catch((error) => console.log(error))
+}
+
 
 
 //Добавление новой карточки NEW

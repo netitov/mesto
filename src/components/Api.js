@@ -21,7 +21,7 @@ export default class Api {
     });
   }
 
-    saveNewCard(data) {
+  saveNewCard(data) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
@@ -68,6 +68,36 @@ export default class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(data)
+    })
+    .then((res) => {
+      return this._checkServerResponse(res)
+    });
+  }
+
+  saveLike(cardId) {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+    .then((res) => {
+      return this._checkServerResponse(res)
+    });
+  }
+
+  deleteLike(cardId) {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+    .then((res) => {
+      return this._checkServerResponse(res)
+    });
+  }
+
+  getLikesSum() {
+    return fetch(`${this._url}/cards`, {
+      //method: 'GET',
+      headers: this._headers,
     })
     .then((res) => {
       return this._checkServerResponse(res)
