@@ -5,6 +5,8 @@ export default class PopupWithSubmit extends Popup {
     super(popupSelector);
     this._handleDeleteCard = handleDeleteCard;
     this._formElement = this._popupSelector.querySelector('.popup__form');
+    this._popupSbtBtn = this._formElement.querySelector('.popup__btn');
+    this._initialSbtBtn = this._popupSbtBtn.textContent;
   }
 
   openPopup(element, data) {
@@ -13,9 +15,11 @@ export default class PopupWithSubmit extends Popup {
     this._data = data;
   }
 
+
   removeCard() {
     this._cardElement.remove();
   }
+
 
   setEventListeners () {
     super.setEventListeners();
@@ -23,5 +27,15 @@ export default class PopupWithSubmit extends Popup {
       this._handleDeleteCard(this._element, this._data);
     })
   }
+
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._popupSbtBtn.textContent = 'Сохранение...';
+    } else {
+      this._popupSbtBtn.textContent = this._initialSbtBtn;
+    }
+  }
+
 }
 

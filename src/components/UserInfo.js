@@ -15,11 +15,9 @@ export default class UserInfo {
 
   setUserInfo (inputValues, _id) {
     this.id = _id;
-
     this._profileName.textContent = inputValues.name;
     this._profileOccupat.textContent = inputValues.about;
     this._profileAvatar.src = inputValues.avatar;
-
   }
 
 

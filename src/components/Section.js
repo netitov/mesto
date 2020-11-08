@@ -7,12 +7,14 @@ export default class Section {
 
   }
 
+
   renderItems() {
     const test = this._renderedItems.reverse();
     test.forEach((item) => {
       this._renderer(item);
     });
   }
+
 
   addItem(element) {
     this._container.prepend(element);

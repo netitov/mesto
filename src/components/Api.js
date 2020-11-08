@@ -21,6 +21,7 @@ export default class Api {
     });
   }
 
+
   saveNewCard(data) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
@@ -31,6 +32,7 @@ export default class Api {
       return this._checkServerResponse(res)
     });
   }
+
 
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
@@ -52,6 +54,7 @@ export default class Api {
     });
   }
 
+
   saveUserData(data) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
@@ -62,6 +65,7 @@ export default class Api {
       return this._checkServerResponse(res)
     });
   }
+
 
   saveAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
@@ -74,6 +78,7 @@ export default class Api {
     });
   }
 
+
   saveLike(cardId) {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: 'PUT',
@@ -84,6 +89,7 @@ export default class Api {
     });
   }
 
+
   deleteLike(cardId) {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: 'DELETE',
@@ -93,19 +99,6 @@ export default class Api {
       return this._checkServerResponse(res)
     });
   }
-
-  getLikesSum() {
-    return fetch(`${this._url}/cards`, {
-      //method: 'GET',
-      headers: this._headers,
-    })
-    .then((res) => {
-      return this._checkServerResponse(res)
-    });
-  }
-
-
-
 }
 
 

@@ -39,11 +39,8 @@ export default class Card {
     }
 
     this._likeSum.textContent = this._card.likes.length
-
-    this._setEventListeners();
-
     this._isLiked()
-
+    this._setEventListeners();
 
     return this._cardElement;
 
@@ -66,34 +63,12 @@ export default class Card {
     evt.target.classList.toggle('elements__like_active')
   }
 
-  /*updateLike() {
-    this._likeSum.textContent = this._card.likes.length;
-    this._likeIcon.classList.add('elements__like_active');
-  }*/
-
-/*
-  _setLike(cardId) {
-    this._api.saveLike(cardId)
-      .then(() => {
-        this.updateLike();
-        //console.log(this._card.likes.length)
-      })
-      .then(() => {
-        this._likeIcon.classList.add('elements__like_active')
-      })
-      .catch((error) => console.log(error))
-
-  }*/
-
 
   _isLiked() {
     this._card.likes.forEach((likeOwner) => {
-      if (likeOwner._id === this._card.owner._id) {
+      if (likeOwner._id === this._userId) {
         this._likeIcon.classList.add('elements__like_active');
       }
     })
   }
-
-
-
 }

@@ -34,10 +34,9 @@ const addCardValidator = new FormValidator(elementList, cardAddPopup);
 const popupAvatarValidator = new FormValidator(elementList, popupAvatar);
 const editProfileValidator = new FormValidator(elementList, editProfileForm);
 const profilePopup = new PopupWithForm(popup, handleSubmitForm);
-const cardPopup = new PopupWithForm(popupCard, handleSubmitCard);//cardAddPopup
+const cardPopup = new PopupWithForm(popupCard, handleSubmitCard);
 const imagePopup = new PopupWithImage(popupImg);
 const userData = new UserInfo(nameProfile, occupationProfile, avatarProfileSrc);
-//const submitPopup = new PopupWithSubmit(popupWithSubmitForm, handleDeleteCard);
 const submitPopup = new PopupWithSubmit(popupWithSubmitForm, handleDeleteCard);
 const avatarPopup = new PopupWithForm(popupAvatar, handleSubmitAvatar);
 
@@ -60,9 +59,14 @@ api.getUserData()
   })
 
 
-
 const initCards = api.getInitialCards()
 const userDataFromServer = api.getUserData();
+
+
+userDataFromServer.then((dataUser) => {
+  userData.setUserInfo(dataUser)
+})
+.catch((error) => console.log(error))
 
 
 const cardsList = new Section ({
@@ -73,14 +77,6 @@ const cardsList = new Section ({
  }, elementContainer)
 
 
-//Add profile data from server
-userDataFromServer.then((dataUser) => {
-  userData.setUserInfo(dataUser)
-})
-.catch((error) => console.log(error))
-
-
-//rendering Cards from server
 initCards.then((data) => {
   const cardsLists = new Section ({
     items: data,
@@ -93,12 +89,12 @@ initCards.then((data) => {
 .catch((error) => console.log(error))
 
 
-//Change Profile data callBack
 function handleSubmitForm (data) {
   const inputValues = {
     name: nameInput.value,
     about: jobInput.value
   }
+  profilePopup.renderLoading(true)
   api.saveUserData(inputValues)
     .then((inputValues) => {
       userData.setUserInfo(inputValues);
@@ -107,11 +103,12 @@ function handleSubmitForm (data) {
     .catch((error) => console.log(error))
 }
 
-//Change avatar callback
+
 function handleSubmitAvatar(data) {
   const inputValue = {
     avatar: avatarInputLink.value
   }
+  avatarPopup.renderLoading(true)
   api.saveAvatar(inputValue)
     .then((inputValue) => {
       userData.setUserInfo(inputValue);
@@ -121,7 +118,6 @@ function handleSubmitAvatar(data) {
 }
 
 
-//Отрытие попап профиля
 function openProfile () {
   profilePopup.openPopup();
   const profileValues = userData.getUserInfo();
@@ -160,6 +156,7 @@ function updateLike (card, likeSum) {
   likeSum.textContent = card.likes.length;
 }
 
+
 function setLike(evt, card, likeSum) {
   api.saveLike(card._id)
     .then((card) => {
@@ -168,6 +165,7 @@ function setLike(evt, card, likeSum) {
     })
     .catch((error) => console.log(error))
 }
+
 
 function deleteLike(evt, card, likeSum) {
   api.deleteLike(card._id)
@@ -179,13 +177,12 @@ function deleteLike(evt, card, likeSum) {
 }
 
 
-
-//Добавление новой карточки NEW
 function handleSubmitCard() {
   const cards = {
     name: cardAddInputText.value,
     link: cardAddInputLink.value
   }
+  cardPopup.renderLoading(true)
     api.saveNewCard(cards)
     .then((card) => {
       addCards(card);
@@ -195,8 +192,8 @@ function handleSubmitCard() {
 }
 
 
-//Delete cards
 function handleDeleteCard(cardElement, cardId) {
+  submitPopup.renderLoading(true)
   api.deleteCard(cardId)
     .then(() => {
       submitPopup.removeCard()
@@ -206,7 +203,6 @@ function handleDeleteCard(cardElement, cardId) {
 }
 
 
-//Превью карточки
 function handleCardClick (name, link) {
   imagePopup.openPopup(name, link)
 }
@@ -221,7 +217,6 @@ popupAddButton.addEventListener('click', function () {
 avatarProfile.addEventListener('click', function () {
   avatarPopup.openPopup();
 });
-
 
 
 profilePopup.setEventListeners();
