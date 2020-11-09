@@ -16,9 +16,7 @@ export default class Api {
     return fetch(`${this._url}/cards`, {
       headers: this._headers
     })
-    .then((res) => {
-      return this._checkServerResponse(res)
-    });
+    .then(this._checkServerResponse);
   }
 
 
@@ -28,9 +26,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-    .then((res) => {
-      return this._checkServerResponse(res)
-    });
+    .then(this._checkServerResponse);
   }
 
 
@@ -39,9 +35,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then((res) => {
-      return this._checkServerResponse(res)
-    });
+    .then(this._checkServerResponse);
   }
 
 
@@ -49,9 +43,7 @@ export default class Api {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers
     })
-    .then((res) => {
-      return this._checkServerResponse(res)
-    });
+    .then(this._checkServerResponse);
   }
 
 
@@ -61,9 +53,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-    .then((res) => {
-      return this._checkServerResponse(res)
-    });
+    .then(this._checkServerResponse);
   }
 
 
@@ -73,9 +63,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-    .then((res) => {
-      return this._checkServerResponse(res)
-    });
+    .then(this._checkServerResponse);
   }
 
 
@@ -84,9 +72,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers,
     })
-    .then((res) => {
-      return this._checkServerResponse(res)
-    });
+    .then(this._checkServerResponse);
   }
 
 
@@ -95,9 +81,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then((res) => {
-      return this._checkServerResponse(res)
-    });
+    .then(this._checkServerResponse);
   }
 }
 

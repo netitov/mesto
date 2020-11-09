@@ -52,6 +52,26 @@ const api = new Api ({
 
 let userId = '';
 
+
+Promise.all([
+  api.getUserData(),
+  api.getInitialCards(),
+])
+  .then(([userInfo, initialCards]) => {
+    userData.setUserInfo(userInfo);
+    const cardsLists = new Section ({
+      items: initialCards,
+      renderer: (items) => {
+        addCards(items);
+      }
+     }, elementContainer);
+     cardsLists.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+
 api.getUserData()
   .then((data) => {
     const userDatas = data;
@@ -60,14 +80,6 @@ api.getUserData()
 
 
 const initCards = api.getInitialCards()
-const userDataFromServer = api.getUserData();
-
-
-userDataFromServer.then((dataUser) => {
-  userData.setUserInfo(dataUser)
-})
-.catch((error) => console.log(error))
-
 
 const cardsList = new Section ({
   data: initCards,
@@ -75,18 +87,6 @@ const cardsList = new Section ({
     addCards(data);
   }
  }, elementContainer)
-
-
-initCards.then((data) => {
-  const cardsLists = new Section ({
-    items: data,
-    renderer: (items) => {
-      addCards(items);
-    }
-   }, elementContainer);
-   cardsLists.renderItems();
-})
-.catch((error) => console.log(error))
 
 
 function handleSubmitForm (data) {
@@ -133,16 +133,15 @@ function addCards(card) {
       submitPopup.openPopup(cardElement, card._id)
     },
     setLike: (evt, card, likeSum) => {
-      const checkLikeOwner = card.likes.find((likeOwner) => {
-        return likeOwner._id === userId;
-      })
+      const isLikeOwner = card.likes.some((l) => l._id === userId)
 
-      if(checkLikeOwner === undefined) {
-        setLike(evt, card, likeSum)
+      if(isLikeOwner) {
+
+        deleteLike(evt, card, likeSum)
 
       }
       else {
-        deleteLike(evt, card, likeSum)
+        setLike(evt, card, likeSum)
       }
 
     }
